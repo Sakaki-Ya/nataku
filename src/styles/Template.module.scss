@@ -1,0 +1,19 @@
+@import "./Colors.scss";
+
+.greenButton {
+  background-color: $deepGreen;
+  box-shadow: 1px 1px 3px #064c11, -1px -1px 3px #0a7e1d;
+  color: $white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  background: $white;
+  box-shadow: inset 3px 3px 6px #b5b5b5, inset -3px -3px 6px #ffffff;
+}

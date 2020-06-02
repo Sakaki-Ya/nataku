@@ -1,0 +1,99 @@
+@import "./Colors.scss";
+
+.user__background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $black;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.user__contents {
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-width: 50vw;
+  height: 100vh;
+  background-color: $white;
+  z-index: 2;
+  padding: 1rem;
+  p {
+    color: $deepSalmon;
+  }
+}
+
+.user__avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.user__avatar {
+  max-width: 100px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.user__upload {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+  color: $deepSalmon;
+}
+
+.user__name {
+  p {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  input {
+    padding: 0.5rem;
+  }
+}
+
+.user__buttons {
+  text-align: right;
+}
+
+.user__saveClose {
+  margin-bottom: 1.5rem;
+}
+
+.user__save {
+  padding: 0;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: $deepSalmon;
+  color: $white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
+.user__close {
+  background-color: transparent;
+  border: none;
+  color: $deepSalmon;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.user__signOut {
+  color: $black;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+}
+
+.user__delete {
+  color: red;
+  font-size: 0.75rem;
+  text-decoration: underline;
+}

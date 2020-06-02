@@ -1,0 +1,15 @@
+@import "./ContentBase.module.scss";
+
+.about__link {
+  margin-bottom: 0.5rem;
+}
+
+.about__wrap {
+  @extend .content__base;
+
+  img {
+    max-width: 100px;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

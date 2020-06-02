@@ -1,0 +1,64 @@
+@import "../Colors.scss";
+
+.menu__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $black;
+  opacity: 0.9;
+}
+
+.menu__wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  display: flex;
+  color: $black;
+}
+
+.menu__contents {
+  white-space: nowrap;
+  height: 100vh;
+  background-color: $white;
+  padding: 1rem;
+}
+
+.menu__logo {
+  cursor: pointer;
+  max-width: 100px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.menu__list {
+  margin-bottom: 2rem;
+  li {
+    margin-bottom: 0.75rem;
+    button {
+      font-size: 1rem;
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+}
+
+.menu__close {
+  color: $deepGreen;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+
+.menu__copy {
+  font-size: 0.7rem;
+}
+
+.menu__text {
+  max-height: 100vh;
+  height: 100%;
+  padding: 2rem 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow-y: auto;
+}

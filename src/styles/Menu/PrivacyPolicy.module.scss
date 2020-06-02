@@ -1,0 +1,5 @@
+@import "./ContentBase.module.scss";
+
+.privacyPolicy__wrap {
+  @extend .content__base;
+}
