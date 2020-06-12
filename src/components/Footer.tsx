@@ -16,6 +16,7 @@ const Footer: React.FC = () => {
         name="sourceSelect"
         hidden
         defaultChecked={item === "Giphy" ? true : false}
+        accept="image/*"
       />
       <label onClick={() => setSource(item)} htmlFor={item}>
         {item}

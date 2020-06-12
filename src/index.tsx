@@ -1,5 +1,6 @@
 import React from "react";
 import { RecoilRoot, atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { firebase } from "./Firebase";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -12,23 +13,37 @@ const sideState = atom({
   key: "side",
   default: "",
 });
+const userState = atom<firebase.firestore.DocumentData | undefined>({
+  key: "user",
+  default: undefined,
+});
 
-export const useSign = () => {
+const useSign = () => {
   const sign = useRecoilValue(signState);
   return sign;
 };
-export const useSetSign = () => {
+const useSetSign = () => {
   const setSign = useSetRecoilState(signState);
   return setSign;
 };
-export const useSide = () => {
+const useSide = () => {
   const side = useRecoilValue(sideState);
   return side;
 };
-export const useSetSide = () => {
+const useSetSide = () => {
   const setSide = useSetRecoilState(sideState);
   return setSide;
 };
+const useUser = () => {
+  const user = useRecoilValue(userState);
+  return user;
+};
+const useSetUser = () => {
+  const setUser = useSetRecoilState(userState);
+  return setUser;
+};
+
+export { useSign, useSetSign, useSide, useSetSide, useUser, useSetUser };
 
 ReactDOM.render(
   <React.StrictMode>

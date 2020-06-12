@@ -3,6 +3,7 @@ import { useSign, useSide } from "./index";
 import "reset-css";
 import "./styles/Global.scss";
 import style from "./styles/App.module.scss";
+import Post from "./components/Post";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SignModal from "./components/SignModal";
@@ -15,6 +16,7 @@ const App = () => {
 
   return (
     <div className={style.app__wrap}>
+      <Post />
       <Header />
       <Footer />
       {sign !== "" && <SignModal />}

@@ -2,12 +2,12 @@ import React from "react";
 import { addParameters } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { withA11y } from "@storybook/addon-a11y";
-import SignModal from "../components/SignModal";
+import User from "../components/User";
 import { RecoilRoot } from "recoil";
 
 export default {
-  title: "SignModalComponent",
-  component: SignModal,
+  title: "UserComponent",
+  component: User,
   decorators: [withA11y],
 };
 
@@ -17,8 +17,8 @@ addParameters({
   },
 });
 
-export const SignUp = () => (
+export const UserSideBar = () => (
   <RecoilRoot>
-    <SignModal />
+    <User />
   </RecoilRoot>
 );

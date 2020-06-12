@@ -11,85 +11,70 @@
 }
 
 .sign__wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  max-width: 768px;
+  width: 100%;
 }
 
 .sign__contents {
+  position: absolute;
+  right: 0;
+  max-width: 50%;
   z-index: 1;
   background-color: $white;
   color: $black;
-  margin: 1rem;
   padding: 1rem;
   border-radius: 5px;
   box-shadow: (0 1px 2px $green);
   h2 {
     font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: $deepGreen;
   }
+  hr {
+    margin: 0 0 0.5rem 0;
+  }
   p {
+    margin-bottom: 0.5rem;
+    line-height: normal;
+  }
+}
+
+.sign__SNSButtons {
+  margin-bottom: 0.75rem;
+  &:last-child {
     margin-bottom: 1rem;
   }
-  span {
-    margin-right: 0.5rem;
-  }
-  input {
-    width: 100%;
-    font-size: 1rem;
-    padding: 0.25rem 0.5rem;
-    background-color: $white;
-  }
 }
 
-.sign__form {
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.sign__balloons {
-  position: relative;
-  display: inline-block;
-  margin: 0 15px;
-  padding: 7px 10px;
+.sign__baseSNSButton {
+  color: $white;
   width: 100%;
-  color: $black;
-  background-color: $white;
-  border: solid 2px $black;
-  border-radius: 5px;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -23px;
-    margin-top: -12px;
-    border: 12px solid transparent;
-    border-right: 12px solid $white;
-    z-index: 2;
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -28px;
-    margin-top: -14px;
-    border: 14px solid transparent;
-    border-right: 14px solid $black;
-    z-index: 1;
-  }
+  padding: 0.5rem;
+  border-radius: 3px;
 }
 
-.sign__close {
-  color: $deepGreen;
-  text-decoration: underline;
-  margin-left: 1rem;
+.Google {
+  background-color: $Google;
+}
+
+.Facebook {
+  background-color: $Facebook;
+}
+
+.Twitter {
+  background-color: $Twitter;
+}
+
+.GitHub {
+  background-color: $GitHub;
+}
+
+.Yahoo {
+  background-color: $Yahoo;
+}
+
+.Microsoft {
+  background-color: $Microsoft;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSetSide } from "../index";
 import style from "../styles/Menu/Menu.module.scss";
+import temp from "../styles/Template.module.scss";
 import logoType from "../img/logoType.svg";
 import About from "./MenuComponents/About";
 import PrivacyPolicy from "./MenuComponents/PrivacyPolicy";
@@ -60,7 +61,7 @@ const Menu: React.FC = () => {
             alt="Nataku"
           />
           <ul className={style.menu__list}>{SideMenu}</ul>
-          <button onClick={menuClose} className={style.menu__close}>
+          <button onClick={menuClose} className={temp.greenUnderline}>
             Close
           </button>
           <p className={style.menu__copy}>&copy;2020 Nataku</p>
