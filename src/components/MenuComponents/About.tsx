@@ -2,10 +2,10 @@ import React from "react";
 import logoType from "../../img/logoType.svg";
 import style from "../../styles/Menu/About.module.scss";
 
-type SourceType = "Giphy" | "Tenor" | "Imgur";
+type SourceType = "Giphy" | "Tenor";
 
 const About: React.FC = () => {
-  const searchSources: SourceType[] = ["Giphy", "Tenor", "Imgur"];
+  const searchSources: SourceType[] = ["Giphy", "Tenor"];
   const sourceList = searchSources.map((item: SourceType, index) => {
     const sourceUrl = (item: SourceType) => {
       switch (item) {
@@ -13,8 +13,6 @@ const About: React.FC = () => {
           return "https://giphy.com";
         case "Tenor":
           return "https://tenor.com";
-        case "Imgur":
-          return "https://imgur.com";
         default:
           return "/";
       }

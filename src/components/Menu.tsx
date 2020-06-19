@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSetSide } from "../index";
 import style from "../styles/Menu/Menu.module.scss";
 import temp from "../styles/Template.module.scss";
 import logoType from "../img/logoType.svg";
@@ -9,12 +8,13 @@ import Contact from "./MenuComponents/Contact";
 
 type MenuType = "About" | "How to" | "Privacy Policy" | "Contact";
 
-const Menu: React.FC = () => {
-  const setSide = useSetSide();
+const Menu: React.FC<{
+  setMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setMenu }) => {
   const [content, setContent] = useState("");
 
   const menuClose = () => {
-    setSide("");
+    setMenu(false);
     setContent("");
   };
 
@@ -61,7 +61,11 @@ const Menu: React.FC = () => {
             alt="Nataku"
           />
           <ul className={style.menu__list}>{SideMenu}</ul>
-          <button onClick={menuClose} className={temp.greenUnderline}>
+          <button
+            onClick={menuClose}
+            className={temp.greenUnderline}
+            style={{ marginBottom: "1rem" }}
+          >
             Close
           </button>
           <p className={style.menu__copy}>&copy;2020 Nataku</p>

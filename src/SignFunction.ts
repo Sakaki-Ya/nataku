@@ -45,34 +45,27 @@ const setProvider = (name: SNSType) => {
 
 const signFucntion = async (name: SNSType) => {
   const provider = await setProvider(name);
-  await auth.signInWithPopup(provider).catch((error) => alert(error));
+  await auth.signInWithPopup(provider);
   const currentUser = auth.currentUser;
   if (!currentUser) return alert("error");
-  const profile = currentUser.providerData[0];
-  if (!profile) return alert("error");
-  let docRef = await db.collection("users").doc(profile.uid);
+  let docRef = await db.collection("users").doc(currentUser.uid);
   let doc = await docRef.get();
   if (doc.exists) {
     // sign in
-    const data = doc.data();
-    alert("Sign in");
-    return data;
+    return alert("Sign in");
   }
   // sign up
-  const userName = profile.displayName;
-  const avatar = profile.photoURL;
-  const email = profile.email;
+  const userName = currentUser.displayName;
+  const avatar = currentUser.photoURL;
+  const email = currentUser.email;
   await docRef.set({
     name: userName ? userName : "Anonymous",
     avatar: avatar ? avatar : defaultAvatar,
     email: email ? email : "",
+    uid: currentUser.uid,
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });
-  docRef = await db.collection("users").doc(profile.uid);
-  doc = await docRef.get();
-  const data = doc.data();
   alert("Create");
-  return data;
 };
 
 export default signFucntion;

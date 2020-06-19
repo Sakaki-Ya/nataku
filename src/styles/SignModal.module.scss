@@ -11,20 +11,14 @@
 }
 
 .sign__wrap {
-  position: relative;
-  max-width: 768px;
-  width: 100%;
-}
-
-.sign__contents {
-  position: absolute;
+  position: fixed;
+  top: 0;
   right: 0;
-  max-width: 50%;
+  min-height: 100vh;
   z-index: 1;
   background-color: $white;
   color: $black;
   padding: 1rem;
-  border-radius: 5px;
   box-shadow: (0 1px 2px $green);
   h2 {
     font-size: 1.25rem;
@@ -38,6 +32,9 @@
   p {
     margin-bottom: 0.5rem;
     line-height: normal;
+    &:last-child {
+      margin-bottom: 1rem;
+    }
   }
 }
 
@@ -51,7 +48,7 @@
 .sign__baseSNSButton {
   color: $white;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 3rem;
   border-radius: 3px;
 }
 
