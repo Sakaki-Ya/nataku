@@ -15,6 +15,7 @@ let swipe = false;
 const settings = {
   className: "slider variable-width",
   dots: false,
+  arrows: false,
   infinite: true,
   centerMode: false,
   slidesToShow: 1,
@@ -29,8 +30,8 @@ const Footer: React.FC = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => setCurrentUser(user));
   }, []);
-  const inputRef = useRef<any>("");
 
+  const inputRef = useRef<any>("");
   const SearchSource = searchSources.map((item: SourceType, index) => (
     <div className={`${style.footer__selectButton} ${style[item]}`} key={index}>
       <input
@@ -51,8 +52,6 @@ const Footer: React.FC = () => {
 
   const [res, setRes] = useState([]);
   const searchGifs = (value: string) => {
-    if (!value.match(/^[A-Za-z0-9]*$/))
-      return alert("Please enter half-width alphanumeric characters.");
     if (getTimer) clearTimeout(getTimer);
     getTimer = setTimeout(async () => {
       const getGifs = functions.httpsCallable("getGifs");
@@ -65,9 +64,11 @@ const Footer: React.FC = () => {
   const getGifURL = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
+    e.preventDefault();
     if (swipe) return;
     const src = e.currentTarget.src;
-    const postsRef = await db.collection("posts").doc();
+    const date = new Date().getTime().toString();
+    const postsRef = await db.collection("posts").doc(date);
     await postsRef.set({
       url: src,
       avatar: currentUser ? currentUser.photoURL : null,
@@ -82,10 +83,9 @@ const Footer: React.FC = () => {
     return (
       <div key={index}>
         <img
-          onMouseDown={() => (swipe = true)}
+          onMouseDown={() => (swipe = false)}
           onMouseMove={() => (swipe = true)}
-          onMouseUp={() => (swipe = false)}
-          onClick={(e) => getGifURL(e)}
+          onMouseUp={getGifURL}
           src={item}
           className={style.footer__gif}
           alt="gif"
@@ -96,12 +96,12 @@ const Footer: React.FC = () => {
 
   const uploadImg = async (file: FileList | null) => {
     if (!file) return;
-    const random = Math.random().toString(32).substring(2).toString();
-    const uploadRef = await storage.ref().child("posts/" + random);
+    const date = new Date().getTime().toString();
+    const uploadRef = await storage.ref().child("posts/" + date);
     const uploadPost = file[0];
     await uploadRef.put(uploadPost);
     const uploadURL = await uploadRef.getDownloadURL();
-    const postsRef = await db.collection("posts").doc();
+    const postsRef = await db.collection("posts").doc(date);
     await postsRef.set({
       url: uploadURL,
       avatar: currentUser ? currentUser.photoURL : null,

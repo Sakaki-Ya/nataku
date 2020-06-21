@@ -6,6 +6,10 @@
   color: $white;
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
 }
 
 .greenUnderline {

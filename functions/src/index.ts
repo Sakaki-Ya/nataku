@@ -1,6 +1,8 @@
 import * as functions from "firebase-functions";
 import axios from "axios";
+import { createTransport } from "nodemailer";
 
+// get GIF
 const GiphyEndpoint = "https://api.giphy.com/v1/gifs/search?q=";
 const GiphyAPIkey = "N4zwkWsp8lrMbifd9SLuEX4oAmqcULpk";
 const TenorEndpoint = "https://api.tenor.com/v1/search?q=";
@@ -9,8 +11,14 @@ const TenorAPIkey = "022ZP17AX73W";
 const limit = 10;
 
 const getGiphy = async (keyword: string) => {
+  const encodeKeyword = encodeURI(keyword);
   const giphyURL =
-    GiphyEndpoint + keyword + "&api_key=" + GiphyAPIkey + "&limit=" + limit;
+    GiphyEndpoint +
+    encodeKeyword +
+    "&api_key=" +
+    GiphyAPIkey +
+    "&limit=" +
+    limit;
   const jsons = await axios.get(giphyURL);
   const data = jsons.data.data;
   const imageUrls = data.map(
@@ -21,8 +29,9 @@ const getGiphy = async (keyword: string) => {
 };
 
 const getTenor = async (keyword: string) => {
+  const encodeKeyword = encodeURI(keyword);
   const tenorURL =
-    TenorEndpoint + keyword + "&key=" + TenorAPIkey + "&limit=" + limit;
+    TenorEndpoint + encodeKeyword + "&key=" + TenorAPIkey + "&limit=" + limit;
   const jsons = await axios.get(tenorURL);
   const data = jsons.data.results;
   const imageUrls = data.map(
@@ -44,4 +53,36 @@ export const getGifs = functions.https.onCall(async (props) => {
     default:
       return getGiphy(keyword);
   }
+});
+
+// contact
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const gmailDestination = functions.config().gmail.destination;
+const mailTransport = createTransport({
+  host: "smtp.gmail.com",
+  secure: true,
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword,
+  },
+});
+
+export const submitEmail = functions.https.onCall((data) => {
+  const email = {
+    from: gmailEmail,
+    to: gmailDestination,
+    text: `
+    name
+    ${data.name}
+
+    email
+    ${data.email}
+
+    message
+    ${data.message}
+    `,
+  };
+
+  mailTransport.sendMail(email).catch((error) => console.log(error));
 });

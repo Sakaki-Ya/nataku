@@ -13,6 +13,10 @@ const Post: React.FC = () => {
   }, []);
 
   const posts = postsArray?.map((item: any, index) => {
+    if (item === postsArray[postsArray.length - 1]) {
+      const element = document.documentElement;
+      setTimeout(() => element.scrollIntoView(false), 500);
+    }
     const avatar = item.avatar;
     const name = item.name;
     const postUid = item.uid;
