@@ -1,90 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth, db, storage } from "../Firebase";
-import { useSetSide, useUser, useSetUser } from "../index";
 import style from "../styles/User.module.scss";
 import temp from "../styles/Template.module.scss";
-import logo from "../img/logo.svg";
+import defaultAvatar from "../img/logo.svg";
 
 let inputName: string;
 
-const User: React.FC = () => {
-  const setSide = useSetSide();
-  const user = useUser();
-  const setUser = useSetUser();
+const User: React.FC<{
+  setUserSide: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setUserSide }) => {
+  const currentUser = auth.currentUser;
 
-  const changeAvatar = async (files: FileList | null) => {
-    if (!files) return;
-    const newAvatar = files[0];
-    const currentUser = auth.currentUser;
-    if (!currentUser || user === undefined) return alert("please sign in.");
-    const profile = currentUser.providerData[0];
-    if (!profile) return alert("can't use this account");
-    const avatarRef = await storage
-      .ref()
-      .child("avatar/" + profile.displayName);
-    await avatarRef.put(newAvatar).catch((error) => alert(error));
-    const currentUserDoc = await db.collection("users").doc(profile.uid);
+  const [avatar, setAvatar] = useState(currentUser?.photoURL);
+  const changeAvatar = async (file: FileList | null) => {
+    if (!file || !currentUser) return;
+    const avatarRef = await storage.ref().child("avatar/" + currentUser.uid);
+    const newAvatar = file[0];
+    await avatarRef.put(newAvatar);
     const newAvatarURL = await avatarRef.getDownloadURL();
-    await currentUserDoc
-      .update({
-        avatar: newAvatarURL,
-      })
-      .catch((error) => alert(error));
-    const doc = await currentUserDoc.get();
-    const data = doc.data();
-    setUser(data);
+    const currentUserDoc = await db.collection("users").doc(currentUser.uid);
+    await currentUserDoc.update({
+      avatar: newAvatarURL,
+    });
+    await currentUser.updateProfile({
+      photoURL: newAvatarURL,
+    });
+    setAvatar(currentUser.photoURL);
   };
 
   const saveName = async () => {
-    const currentUser = auth.currentUser;
-    if (!currentUser) return alert("error");
-    const profile = currentUser.providerData[0];
-    if (!profile) return alert("error");
-    const currentUserDoc = await db.collection("users").doc(profile.uid);
-    await currentUserDoc
-      .update({
-        name: inputName,
-      })
-      .catch((error) => alert(error));
-    const doc = await currentUserDoc.get();
-    const data = doc.data();
-    setUser(data);
+    if (!currentUser) return;
+    const currentUserDoc = await db.collection("users").doc(currentUser.uid);
+    await currentUserDoc.update({
+      name: inputName,
+    });
+    currentUser.updateProfile({
+      displayName: inputName,
+    });
   };
 
   const signOut = () => {
-    const currentUser = auth.currentUser;
-    if (!currentUser) return alert("error");
-    currentUser.delete();
-    setUser(undefined);
-    setSide("");
+    if (!currentUser) return;
+    auth.signOut();
+    setUserSide(false);
   };
 
   const deleteUser = async () => {
-    const currentUser = auth.currentUser;
-    if (!currentUser || user === undefined) return alert("error");
-    const profile = currentUser.providerData[0];
-    if (!profile) return alert("error");
-    db.collection("users")
-      .doc(profile.uid)
-      .delete()
-      .catch((error) => alert(error));
-    const deleteStorage = await storage
-      .ref()
-      .child("avatar/" + profile.displayName);
-    deleteStorage.delete().catch(() => {});
-    currentUser.delete().catch((error) => alert(error));
-    setUser(undefined);
-    setSide("");
+    if (!currentUser) return;
+    await db.collection("users").doc(currentUser.uid).delete();
+    currentUser.delete();
+    auth.signOut();
+    setUserSide(false);
   };
+
+  const name = currentUser?.displayName;
 
   return (
     <>
-      <div onClick={() => setSide("")} className={style.user__background} />
+      <div
+        onClick={() => setUserSide(false)}
+        className={style.user__background}
+      />
       <div className={style.user__contents}>
         <div className={style.user__avatarSection}>
           <img
             className={style.user__avatar}
-            src={user?.avatar === null ? logo : user?.avatar}
+            src={avatar ? avatar : defaultAvatar}
             alt="Avatar"
           />
           <input
@@ -104,7 +85,7 @@ const User: React.FC = () => {
           <input
             onChange={(e) => (inputName = e.target.value)}
             className={temp.input}
-            defaultValue={user?.name === null ? "Anonymous" : user?.name}
+            defaultValue={name ? name : "Anonymous"}
             type="text"
             placeholder="Your name"
           />
@@ -114,7 +95,10 @@ const User: React.FC = () => {
             <button onClick={saveName} className={style.user__save}>
               Save
             </button>
-            <button onClick={() => setSide("")} className={style.user__close}>
+            <button
+              onClick={() => setUserSide(false)}
+              className={style.user__close}
+            >
               Close
             </button>
           </div>
