@@ -9,7 +9,7 @@ import temp from "../styles/Template.module.scss";
 type SourceType = "Giphy" | "Tenor";
 
 let getTimer: NodeJS.Timeout;
-let source = "Giphy";
+let sourceName = "Giphy";
 let swipe = false;
 
 const settings = {
@@ -31,31 +31,40 @@ const Footer: React.FC = () => {
     auth.onAuthStateChanged((user) => setCurrentUser(user));
   }, []);
 
-  const inputRef = useRef<any>("");
-  const SearchSource = searchSources.map((item: SourceType, index) => (
-    <div className={`${style.footer__selectButton} ${style[item]}`} key={index}>
+  const inputRef = useRef<HTMLInputElement>(null);
+  const SearchSource = searchSources.map((source: SourceType, index) => (
+    <div
+      className={`${style.footer__selectButton} ${style[source]}`}
+      key={index}
+    >
       <input
         onClick={(e) => {
-          source = e.currentTarget.id;
-          inputRef.current.placeholder = "Search (Powered by " + source + ")";
+          sourceName = e.currentTarget.id;
+          if (inputRef.current)
+            inputRef.current.placeholder =
+              "Search (Powered by " + sourceName + ")";
         }}
-        id={item}
+        id={source}
         type="radio"
         name="sourceSelect"
         hidden
-        defaultChecked={item === "Giphy" ? true : false}
+        defaultChecked={source === "Giphy" ? true : false}
         accept="image/*"
       />
-      <label htmlFor={item}>{item}</label>
+      <label htmlFor={source}>{source}</label>
     </div>
   ));
 
   const [res, setRes] = useState([]);
-  const searchGifs = (value: string) => {
+  const searchGifs = (e: {
+    persist: () => void;
+    target: { value: string };
+  }) => {
+    e.persist();
     if (getTimer) clearTimeout(getTimer);
     getTimer = setTimeout(async () => {
       const getGifs = functions.httpsCallable("getGifs");
-      const props = { source: source, keyword: value };
+      const props = { source: sourceName, keyword: e.target.value };
       const response = await getGifs(props);
       setRes(response.data);
     }, 300);
@@ -64,7 +73,6 @@ const Footer: React.FC = () => {
   const getGifURL = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
-    e.preventDefault();
     if (swipe) return;
     const src = e.currentTarget.src;
     const date = new Date().getTime().toString();
@@ -77,16 +85,19 @@ const Footer: React.FC = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setRes([]);
-    inputRef.current.value = "";
+    if (inputRef.current) inputRef.current.value = "";
   };
-  const searchResult = res.map((item, index) => {
+  const searchResult = res.map((src, index) => {
     return (
       <div key={index}>
         <img
+          onTouchStart={() => {
+            if (inputRef.current) inputRef.current.blur();
+          }}
           onMouseDown={() => (swipe = false)}
           onMouseMove={() => (swipe = true)}
           onMouseUp={getGifURL}
-          src={item}
+          src={src}
           className={style.footer__gif}
           alt="gif"
         />
@@ -120,12 +131,11 @@ const Footer: React.FC = () => {
       <div>{SearchSource}</div>
       <div className={style.footer__forms}>
         <input
-          onChange={(e) => searchGifs(e.target.value)}
+          onChange={searchGifs}
           ref={inputRef}
           className={`${temp.input} ${style.footer_search}`}
-          pattern="^[0-9A-Za-z]+$"
           placeholder={
-            inputRef.current.placeholder
+            inputRef.current
               ? inputRef.current.placeholder
               : "Search (Powerd by Giphy)"
           }

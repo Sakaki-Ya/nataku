@@ -29,7 +29,7 @@ const User: React.FC<{
   };
 
   const saveName = async () => {
-    if (!currentUser) return;
+    if (!currentUser || !inputName) return;
     const currentUserDoc = await db.collection("users").doc(currentUser.uid);
     await currentUserDoc.update({
       name: inputName,

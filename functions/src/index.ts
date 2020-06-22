@@ -60,7 +60,7 @@ const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
 const gmailDestination = functions.config().gmail.destination;
 const mailTransport = createTransport({
-  host: "smtp.gmail.com",
+  host: "gmail",
   secure: true,
   auth: {
     user: gmailEmail,
