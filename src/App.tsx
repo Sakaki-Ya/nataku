@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "reset-css";
 import "./styles/Global.scss";
 import style from "./styles/App.module.scss";
@@ -11,6 +13,7 @@ const App = () => (
     <Post />
     <Footer />
     <Header />
+    <ToastContainer />
   </div>
 );
 

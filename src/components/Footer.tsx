@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import style from "../styles/Footer.module.scss";
 import temp from "../styles/Template.module.scss";
+import BarLoader from "react-spinners/BarLoader";
+import { css } from "@emotion/core";
 
 type SourceType = "Giphy" | "Tenor";
 
@@ -24,6 +26,10 @@ const settings = {
 };
 
 const searchSources: SourceType[] = ["Giphy", "Tenor"];
+
+const loaderStyle = css`
+  margin: auto;
+`;
 
 const Footer: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
@@ -105,8 +111,10 @@ const Footer: React.FC = () => {
     );
   });
 
+  const [uploading, setUploading] = useState(false);
   const uploadImg = async (file: FileList | null) => {
     if (!file) return;
+    setUploading(true);
     const date = new Date().getTime().toString();
     const uploadRef = await storage.ref().child("posts/" + date);
     const uploadPost = file[0];
@@ -119,10 +127,18 @@ const Footer: React.FC = () => {
       name: currentUser ? currentUser.displayName : null,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    setUploading(false);
   };
 
   return (
     <footer className={style.footer__wrap}>
+      <BarLoader
+        css={loaderStyle}
+        width={200}
+        height={12}
+        color={"#3ab549"}
+        loading={uploading}
+      />
       {res !== [] && (
         <div className={style.footer__searchResult}>
           <Slider {...settings}>{searchResult}</Slider>

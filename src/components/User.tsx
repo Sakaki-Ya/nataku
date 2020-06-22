@@ -1,10 +1,40 @@
 import React, { useState } from "react";
 import { auth, db, storage } from "../Firebase";
+import { toast, Slide } from "react-toastify";
 import style from "../styles/User.module.scss";
 import temp from "../styles/Template.module.scss";
 import defaultAvatar from "../img/logo.svg";
+import BarLoader from "react-spinners/BarLoader";
+import { css } from "@emotion/core";
 
 let inputName: string;
+
+const signOutAlert = () =>
+  toast.warning("Sign Out", {
+    position: "bottom-center",
+    autoClose: 1500,
+    transition: Slide,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  });
+const deleteAccountAlert = () =>
+  toast.error("Delete Account", {
+    position: "bottom-center",
+    autoClose: 1500,
+    transition: Slide,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  });
+
+const loaderStyle = css`
+  margin-top: 1rem;
+`;
 
 const User: React.FC<{
   setUserSide: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,8 +42,10 @@ const User: React.FC<{
   const currentUser = auth.currentUser;
 
   const [avatar, setAvatar] = useState(currentUser?.photoURL);
+  const [uploading, setUploading] = useState(false);
   const changeAvatar = async (file: FileList | null) => {
     if (!file || !currentUser) return;
+    setUploading(true);
     const avatarRef = await storage.ref().child("avatar/" + currentUser.uid);
     const newAvatar = file[0];
     await avatarRef.put(newAvatar);
@@ -26,6 +58,7 @@ const User: React.FC<{
       photoURL: newAvatarURL,
     });
     setAvatar(currentUser.photoURL);
+    setUploading(false);
   };
 
   const saveName = async () => {
@@ -42,6 +75,7 @@ const User: React.FC<{
   const signOut = () => {
     if (!currentUser) return;
     auth.signOut();
+    signOutAlert();
     setUserSide(false);
   };
 
@@ -50,6 +84,7 @@ const User: React.FC<{
     await db.collection("users").doc(currentUser.uid).delete();
     currentUser.delete();
     auth.signOut();
+    deleteAccountAlert();
     setUserSide(false);
   };
 
@@ -79,6 +114,12 @@ const User: React.FC<{
           <label className={style.user__upload} htmlFor="changeImage">
             &#x2b06;Change Image
           </label>
+          <BarLoader
+            css={loaderStyle}
+            height={8}
+            color={"#3ab549"}
+            loading={uploading}
+          />
         </div>
         <div className={style.user__name}>
           <p>&#x1f58a; Name</p>

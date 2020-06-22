@@ -47,12 +47,12 @@ const signFucntion = async (name: SNSType) => {
   const provider = await setProvider(name);
   await auth.signInWithPopup(provider);
   const currentUser = auth.currentUser;
-  if (!currentUser) return alert("error");
+  if (!currentUser) return;
   let docRef = await db.collection("users").doc(currentUser.uid);
   let doc = await docRef.get();
   if (doc.exists) {
     // sign in
-    return alert("Sign in");
+    return "Sign In";
   }
   // sign up
   const userName = currentUser.displayName;
@@ -65,7 +65,7 @@ const signFucntion = async (name: SNSType) => {
     uid: currentUser.uid,
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });
-  alert("Create");
+  return "Sign Up";
 };
 
 export default signFucntion;

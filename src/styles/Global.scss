@@ -20,9 +20,49 @@ button {
   font-size: 1rem;
   font-weight: bold;
   font-family: sans-serif, Arial;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 input {
   border: none;
   font-family: sans-serif, Arial;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+label {
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.Toastify__toast--success {
+  background-color: $deepGreen;
+  color: $white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Toastify__toast--info {
+  background-color: $deepSalmon;
+  color: $white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Toastify__toast--warning {
+  background-color: black;
+  color: $white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Toastify__toast--error {
+  background-color: red;
+  color: $white;
+  font-weight: bold;
+  text-align: center;
 }

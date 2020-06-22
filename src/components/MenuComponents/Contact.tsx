@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import { functions } from "../../Firebase";
+import { toast, Slide } from "react-toastify";
 import style from "../../styles/Menu/Contact.module.scss";
 import temp from "../../styles/Template.module.scss";
+
+const submitAlert = () =>
+  toast.info("Submit Message", {
+    position: "bottom-center",
+    autoClose: 1500,
+    transition: Slide,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  });
 
 const Contact: React.FC = () => {
   const [input, setInput] = useState(["", "", ""]);
@@ -32,7 +45,7 @@ const Contact: React.FC = () => {
     const submitEmail = functions.httpsCallable("submitEmail");
     const data = { name: inputName, email: inputEmail, message: inputMessage };
     await submitEmail(data);
-    alert("Thanks");
+    submitAlert();
   };
 
   return (
