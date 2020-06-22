@@ -16,7 +16,7 @@
 
 .header__logo {
   cursor: pointer;
-  filter: drop-shadow(0 1px 2px $green);
+  filter: drop-shadow(0 1px 2px $lightGreen);
   max-width: 50px;
   width: 100%;
 }
@@ -42,7 +42,7 @@
 }
 
 .header__signIn {
-  color: $green;
+  color: $lightGreen;
   text-decoration: underline;
   margin-left: 1rem;
 }
