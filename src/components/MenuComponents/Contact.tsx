@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { functions } from "../../Firebase";
+import { db } from "../../Firebase";
 import { toast, Slide } from "react-toastify";
 import style from "../../styles/Menu/Contact.module.scss";
 import temp from "../../styles/Template.module.scss";
@@ -16,7 +16,9 @@ const submitAlert = () =>
     progress: undefined,
   });
 
-const Contact: React.FC = () => {
+const Contact: React.FC<{
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ setContent }) => {
   const [input, setInput] = useState(["", "", ""]);
   const [inputName, inputEmail, inputMessage] = [input[0], input[1], input[2]];
 
@@ -42,10 +44,15 @@ const Contact: React.FC = () => {
   const submit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (!input) return;
-    const submitEmail = functions.httpsCallable("submitEmail");
-    const data = { name: inputName, email: inputEmail, message: inputMessage };
-    await submitEmail(data);
+    const date = new Date().getTime().toString();
+    const contactData = await db.collection("contact").doc(date);
+    await contactData.set({
+      name: inputName,
+      email: inputEmail,
+      message: inputMessage,
+    });
     submitAlert();
+    setContent("");
   };
 
   return (

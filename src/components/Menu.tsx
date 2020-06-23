@@ -34,7 +34,7 @@ const Menu: React.FC<{
         case "Privacy Policy":
           return <PrivacyPolicy />;
         case "Contact":
-          return <Contact />;
+          return <Contact setContent={setContent} />;
         default:
           return <></>;
       }
