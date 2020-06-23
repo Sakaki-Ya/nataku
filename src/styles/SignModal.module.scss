@@ -7,7 +7,7 @@
   width: 100vw;
   height: 100vh;
   background-color: $black;
-  opacity: 0.9;
+  opacity: 0.5;
 }
 
 .sign__wrap {
@@ -16,7 +16,7 @@
   right: 0;
   min-height: 100vh;
   z-index: 1;
-  background-color: $white;
+  background-color: rgba($color: #ffffff, $alpha: 0.85);
   color: $black;
   padding: 1rem;
   box-shadow: (0 1px 2px $green);
@@ -54,24 +54,30 @@
 
 .Google {
   background-color: $Google;
+  box-shadow: 0px 2px 4px #993027;
 }
 
 .Facebook {
   background-color: $Facebook;
+  box-shadow: 0px 2px 4px #1054a9;
 }
 
 .Twitter {
   background-color: $Twitter;
+  box-shadow: 0px 2px 4px #1471a9;
 }
 
 .GitHub {
   background-color: $GitHub;
+  box-shadow: 0px 2px 4px #191d20;
 }
 
 .Yahoo {
   background-color: $Yahoo;
+  box-shadow: 0px 2px 4px #2f016a;
 }
 
 .Microsoft {
   background-color: $Microsoft;
+  box-shadow: 2px 2px 4px #a93819;
 }

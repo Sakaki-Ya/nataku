@@ -2,10 +2,14 @@
 
 .greenButton {
   background-color: $deepGreen;
-  box-shadow: 1px 1px 3px #064c11, -1px -1px 3px #0a7e1d;
+  box-shadow: 0px 2px 4px #064c11;
   color: $white;
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
 }
 
 .greenUnderline {

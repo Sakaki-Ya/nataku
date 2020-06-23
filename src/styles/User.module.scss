@@ -7,7 +7,7 @@
   width: 100vw;
   height: 100vh;
   background-color: $black;
-  opacity: 0.9;
+  opacity: 0.5;
   z-index: 1;
 }
 
@@ -18,7 +18,7 @@
   max-width: 50vw;
   height: 100vh;
   overflow-y: auto;
-  background-color: $white;
+  background-color: rgba($color: #ffffff, $alpha: 0.85);
   z-index: 2;
   padding: 1rem;
   p {
@@ -73,6 +73,7 @@
   font-size: 1rem;
   font-weight: bold;
   background-color: $deepSalmon;
+  box-shadow: 0px 2px 4px #953e14;
   color: $white;
   padding: 0.25rem 0.5rem;
   border-radius: 3px;

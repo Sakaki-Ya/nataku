@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import axios from "axios";
 
+// get GIF
 const GiphyEndpoint = "https://api.giphy.com/v1/gifs/search?q=";
 const GiphyAPIkey = "N4zwkWsp8lrMbifd9SLuEX4oAmqcULpk";
 const TenorEndpoint = "https://api.tenor.com/v1/search?q=";
@@ -9,8 +10,14 @@ const TenorAPIkey = "022ZP17AX73W";
 const limit = 10;
 
 const getGiphy = async (keyword: string) => {
+  const encodeKeyword = encodeURI(keyword);
   const giphyURL =
-    GiphyEndpoint + keyword + "&api_key=" + GiphyAPIkey + "&limit=" + limit;
+    GiphyEndpoint +
+    encodeKeyword +
+    "&api_key=" +
+    GiphyAPIkey +
+    "&limit=" +
+    limit;
   const jsons = await axios.get(giphyURL);
   const data = jsons.data.data;
   const imageUrls = data.map(
@@ -21,8 +28,9 @@ const getGiphy = async (keyword: string) => {
 };
 
 const getTenor = async (keyword: string) => {
+  const encodeKeyword = encodeURI(keyword);
   const tenorURL =
-    TenorEndpoint + keyword + "&key=" + TenorAPIkey + "&limit=" + limit;
+    TenorEndpoint + encodeKeyword + "&key=" + TenorAPIkey + "&limit=" + limit;
   const jsons = await axios.get(tenorURL);
   const data = jsons.data.results;
   const imageUrls = data.map(
