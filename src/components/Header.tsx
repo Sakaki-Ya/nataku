@@ -8,6 +8,7 @@ import "../styles/Transition.scss";
 import style from "../styles/Header.module.scss";
 import temp from "../styles/Template.module.scss";
 import logo from "../img/logo.svg";
+import defaultAvatar from "../img/logo.svg";
 
 type formType = "Sign Up" | "Sign In";
 const forms: formType[] = ["Sign Up", "Sign In"];
@@ -103,7 +104,7 @@ const Header: React.FC = () => {
             >
               <img
                 className={style.header__avatar}
-                src={avatar ? avatar : logo}
+                src={avatar ? avatar : defaultAvatar}
                 alt="avatar"
               />
               <span>{name ? name : "Anonymas"}</span>
