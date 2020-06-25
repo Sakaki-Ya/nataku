@@ -7,23 +7,25 @@ type PostType = {
   url: string;
   avatar: string | null;
   name: string | null;
-  uid: string | null;
+  uid: string | undefined;
 };
 
 const Post: React.FC = () => {
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => setCurrentUser(user));
+  }, []);
+
   const postsArray = useCollectionData<PostType>(
     db.collection("posts").orderBy("createdAt").limit(15)
   )[0];
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => setCurrentUser(user));
-  }, []);
 
   const posts = postsArray?.map((postObj, index) => {
     if (postObj === postsArray[postsArray.length - 1]) {
       const element = document.documentElement;
       setTimeout(() => element.scrollIntoView(false), 500);
     }
+
     const avatar = postObj.avatar;
     const name = postObj.name;
     const postUid = postObj.uid;

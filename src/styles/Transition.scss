@@ -1,0 +1,54 @@
+// side bar background
+.sideBackground-enter-active {
+  opacity: 0;
+}
+.sideBackground-enter-done {
+  opacity: 1;
+  transition: 0.3s;
+}
+.sideBackground-exit-active {
+  opacity: 0;
+  transition: 0.3s;
+}
+
+// side bar left
+.sideLeft-enter-active {
+  transform: translateX(-100vw);
+}
+.sideLeft-enter-done {
+  transform: translateX(0);
+  transition: 0.3s;
+}
+.sideLeft-exit-active {
+  transform: translateX(-100vw);
+  transition: 0.3s;
+}
+
+// side bar right
+.sideRight-enter-active {
+  transform: translateX(100vw);
+}
+.sideRight-enter-done {
+  transform: translateX(0);
+  transition: 0.3s;
+}
+.sideRight-exit-active {
+  transform: translateX(100vw);
+  transition: 0.3s;
+}
+
+// menu content
+.menu-enter-active {
+  transform: translateX(-100vw);
+  opacity: 0;
+}
+.menu-enter-done {
+  transform: translateX(0);
+  opacity: 1;
+  transition: 0.3s;
+}
+.menu-exit-active {
+  transform: translateX(-100vw);
+  opacity: 0;
+  transition: 0.3s;
+}

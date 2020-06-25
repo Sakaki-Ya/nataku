@@ -26,3 +26,12 @@
   background: $white;
   box-shadow: inset 3px 3px 6px #b5b5b5, inset -3px -3px 6px #ffffff;
 }
+
+.sideBackground {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: black, $alpha: 0.3);
+}

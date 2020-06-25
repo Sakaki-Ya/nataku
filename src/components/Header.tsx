@@ -3,6 +3,8 @@ import { auth } from "../Firebase";
 import Menu from "./Menu";
 import SignModal from "./SignModal";
 import User from "./User";
+import { CSSTransition } from "react-transition-group";
+import "../styles/Transition.scss";
 import style from "../styles/Header.module.scss";
 import temp from "../styles/Template.module.scss";
 import logo from "../img/logo.svg";
@@ -42,11 +44,56 @@ const Header: React.FC = () => {
           src={logo}
           alt="Nataku"
         />
-        {menu && <Menu setMenu={setMenu} />}
+        <CSSTransition
+          in={menu}
+          classNames="sideBackground"
+          timeout={{
+            enter: 0,
+            exit: 500,
+          }}
+          unmountOnExit
+        >
+          <div onClick={() => setMenu(false)} className={temp.sideBackground} />
+        </CSSTransition>
+        <CSSTransition
+          in={menu}
+          classNames="sideLeft"
+          timeout={{
+            enter: 0,
+            exit: 500,
+          }}
+          unmountOnExit
+        >
+          <Menu setMenu={setMenu} />
+        </CSSTransition>
         {!currentUser ? (
           <>
             <div className={style.header__signButtons}>{SignButton}</div>
-            {sign !== "" && <SignModal sign={sign} setSign={setSign} />}
+            <CSSTransition
+              in={sign !== ""}
+              classNames="sideBackground"
+              timeout={{
+                enter: 0,
+                exit: 500,
+              }}
+              unmountOnExit
+            >
+              <div
+                onClick={() => setSign("")}
+                className={temp.sideBackground}
+              />
+            </CSSTransition>
+            <CSSTransition
+              in={sign !== ""}
+              classNames="sideRight"
+              timeout={{
+                enter: 0,
+                exit: 500,
+              }}
+              unmountOnExit
+            >
+              <SignModal sign={sign} setSign={setSign} />
+            </CSSTransition>
           </>
         ) : (
           <>
@@ -61,7 +108,31 @@ const Header: React.FC = () => {
               />
               <span>{name ? name : "Anonymas"}</span>
             </button>
-            {userSide && <User setUserSide={setUserSide} />}
+            <CSSTransition
+              in={userSide}
+              classNames="sideBackground"
+              timeout={{
+                enter: 0,
+                exit: 500,
+              }}
+              unmountOnExit
+            >
+              <div
+                onClick={() => setUserSide(false)}
+                className={temp.sideBackground}
+              />
+            </CSSTransition>
+            <CSSTransition
+              in={userSide}
+              classNames="sideRight"
+              timeout={{
+                enter: 0,
+                exit: 500,
+              }}
+              unmountOnExit
+            >
+              <User setUserSide={setUserSide} />
+            </CSSTransition>
           </>
         )}
       </div>

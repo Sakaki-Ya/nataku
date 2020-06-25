@@ -76,7 +76,6 @@ const User: React.FC<{
     if (!currentUser) return;
     auth.signOut();
     signOutAlert();
-    setUserSide(false);
   };
 
   const deleteUser = async () => {
@@ -85,17 +84,12 @@ const User: React.FC<{
     currentUser.delete();
     auth.signOut();
     deleteAccountAlert();
-    setUserSide(false);
   };
 
   const name = currentUser?.displayName;
 
   return (
     <>
-      <div
-        onClick={() => setUserSide(false)}
-        className={style.user__background}
-      />
       <div className={style.user__contents}>
         <div className={style.user__avatarSection}>
           <img

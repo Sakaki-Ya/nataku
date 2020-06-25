@@ -1,25 +1,14 @@
 @import "./Colors.scss";
 
-.sign__background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: $black;
-  opacity: 0.5;
-}
-
 .sign__wrap {
   position: fixed;
   top: 0;
   right: 0;
   min-height: 100vh;
-  z-index: 1;
-  background-color: rgba($color: #ffffff, $alpha: 0.85);
-  color: $black;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 1rem;
-  box-shadow: (0 1px 2px $green);
   h2 {
     font-size: 1.25rem;
     font-weight: bold;
