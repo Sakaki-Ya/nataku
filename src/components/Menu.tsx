@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
+import "../styles/Transition.scss";
 import style from "../styles/Menu/Menu.module.scss";
 import temp from "../styles/Template.module.scss";
 import logoType from "../img/logoType.svg";
@@ -41,38 +43,42 @@ const Menu: React.FC<{
     };
 
     return (
-      <div key={index}>
-        {content === item && (
-          <div className={style.menu__text}>{renderContent(item)}</div>
-        )}
-      </div>
+      <CSSTransition
+        in={content === item}
+        classNames="menu"
+        timeout={{
+          enter: 0,
+          exit: 500,
+        }}
+        unmountOnExit
+        key={index}
+      >
+        <div className={style.menu__text}>{renderContent(item)}</div>
+      </CSSTransition>
     );
   });
 
   return (
-    <>
-      <div onClick={menuClose} className={style.menu__background} />
-      <div className={style.menu__wrap}>
-        <div className={style.menu__contents}>
-          <img
-            onClick={menuClose}
-            className={style.menu__logo}
-            src={logoType}
-            alt="Nataku"
-          />
-          <ul className={style.menu__list}>{SideMenu}</ul>
-          <button
-            onClick={menuClose}
-            className={temp.greenUnderline}
-            style={{ marginBottom: "1rem" }}
-          >
-            Close
-          </button>
-          <p className={style.menu__copy}>&copy;2020 Nataku</p>
-        </div>
-        {SideText}
+    <div className={style.menu__wrap}>
+      <div className={style.menu__contents}>
+        <img
+          onClick={menuClose}
+          className={style.menu__logo}
+          src={logoType}
+          alt="Nataku"
+        />
+        <ul className={style.menu__list}>{SideMenu}</ul>
+        <button
+          onClick={menuClose}
+          className={temp.greenUnderline}
+          style={{ marginBottom: "1rem" }}
+        >
+          Close
+        </button>
+        <p className={style.menu__copy}>&copy;2020 Nataku</p>
       </div>
-    </>
+      <div onClick={(e) => e.stopPropagation()}>{SideText}</div>
+    </div>
   );
 };
 

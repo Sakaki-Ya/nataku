@@ -71,19 +71,16 @@ const SignModal: React.FC<SignModalProps> = ({ sign, setSign }) => {
   };
 
   return (
-    <>
-      <div onClick={() => setSign("")} className={style.sign__background} />
-      <div className={style.sign__wrap}>
-        <h2>{sign}</h2>
-        <hr />
-        <div>{SNSBUtton}</div>
-        <div style={{ textAlign: "right" }}>
-          <button onClick={() => setSign("")} className={temp.greenUnderline}>
-            close
-          </button>
-        </div>
+    <div className={style.sign__wrap}>
+      <h2>{sign}</h2>
+      <hr />
+      <div>{SNSBUtton}</div>
+      <div style={{ textAlign: "right" }}>
+        <button onClick={() => setSign("")} className={temp.greenUnderline}>
+          close
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

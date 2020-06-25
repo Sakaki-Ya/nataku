@@ -1,28 +1,17 @@
 @import "../Colors.scss";
 
-.menu__background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: $black;
-  opacity: 0.5;
-}
-
 .menu__wrap {
   position: fixed;
   top: 0;
   left: 0;
-  min-height: 100vh;
   display: flex;
-  color: $black;
 }
 
 .menu__contents {
   white-space: nowrap;
   height: 100vh;
-  background-color: rgba($color: #ffffff, $alpha: 0.85);
+  color: $black;
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 1rem;
 }
 
