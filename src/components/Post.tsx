@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../Firebase";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useUpdate } from "../App";
 import style from "../styles/Post.module.scss";
 
 type PostType = {
@@ -10,43 +10,23 @@ type PostType = {
   uid: string | undefined;
 };
 
-const Post: React.FC = () => {
-  const postsArray = useCollectionData<PostType>(
-    db.collection("posts").orderBy("createdAt").limit(15)
-  )[0];
-
-  const posts = postsArray?.map((postObj, index) => {
-    return <PostParts postsArray={postsArray} postObj={postObj} key={index} />;
-  });
-
-  return (
-    <main className={style.post__wrap}>
-      <div>{posts}</div>
-    </main>
-  );
-};
-
 type PostPartsType = {
   postsArray: PostType[] | undefined;
   postObj: PostType;
 };
 
-const PostParts = ({ postsArray, postObj }: PostPartsType) => {
-  console.log("hoge");
-  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => setCurrentUser(user));
-  }, []);
-
+const Post = ({ postsArray, postObj }: PostPartsType) => {
   if (postsArray && postObj === postsArray[postsArray.length - 1]) {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);
   }
+  console.log("hoge");
 
   const [
     userData,
     setUserData,
   ] = useState<firebase.firestore.DocumentData | null>();
+  const update = useUpdate();
   useEffect(() => {
     if (!postObj.uid) return;
     (async () => {
@@ -54,7 +34,12 @@ const PostParts = ({ postsArray, postObj }: PostPartsType) => {
       const userDataRef = userDoc.data();
       setUserData(userDataRef);
     })();
-  }, [postObj.uid]);
+  }, [postObj.uid, update]);
+
+  const [currentUser, setCurrentUser] = useState(auth.currentUser);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => setCurrentUser(user));
+  }, []);
 
   return (
     <div className={style.post__gifWrap}>

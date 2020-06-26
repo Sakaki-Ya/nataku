@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSetUpdate } from "../App";
 import { auth, db, storage } from "../Firebase";
 import { toast, Slide } from "react-toastify";
 import style from "../styles/User.module.scss";
@@ -41,7 +42,8 @@ const User: React.FC<{
 }> = ({ setUserSide }) => {
   const currentUser = auth.currentUser;
 
-  const [avatar, setAvatar] = useState(currentUser?.photoURL);
+  const setUpdate = useSetUpdate();
+
   const [uploading, setUploading] = useState(false);
   const changeAvatar = async (file: FileList | null) => {
     if (!file || !currentUser) return;
@@ -57,8 +59,8 @@ const User: React.FC<{
     await currentUser.updateProfile({
       photoURL: newAvatarURL,
     });
-    setAvatar(currentUser.photoURL);
     setUploading(false);
+    setUpdate(true);
   };
 
   const saveName = async () => {
@@ -70,6 +72,7 @@ const User: React.FC<{
     currentUser.updateProfile({
       displayName: inputName,
     });
+    setUpdate(true);
   };
 
   const signOut = () => {
@@ -86,6 +89,7 @@ const User: React.FC<{
     deleteAccountAlert();
   };
 
+  const avatar = currentUser?.photoURL;
   const name = currentUser?.displayName;
 
   return (
