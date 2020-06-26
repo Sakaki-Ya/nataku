@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { useSetUpdate } from "../App";
-import { auth, db, storage } from "../Firebase";
+import { useSetUpdate } from "../../App";
+import { auth, db, storage } from "../../Firebase";
 import { toast, Slide } from "react-toastify";
-import style from "../styles/User.module.scss";
-import temp from "../styles/Template.module.scss";
-import defaultAvatar from "../img/logo.svg";
+import style from "../../styles/HeaderStyle/User.module.scss";
+import temp from "../../styles/ConfigStyle/Template.module.scss";
+import defaultAvatar from "../../img/logo.svg";
 import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
 
 let inputName: string;
 
+const updateAlert = () =>
+  toast("Update", {
+    position: "bottom-center",
+    autoClose: 1500,
+    transition: Slide,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  });
 const signOutAlert = () =>
   toast.warning("Sign Out", {
     position: "bottom-center",
@@ -61,6 +72,7 @@ const User: React.FC<{
     });
     setUploading(false);
     setUpdate(true);
+    updateAlert();
   };
 
   const saveName = async () => {
@@ -73,6 +85,7 @@ const User: React.FC<{
       displayName: inputName,
     });
     setUpdate(true);
+    updateAlert();
   };
 
   const signOut = () => {

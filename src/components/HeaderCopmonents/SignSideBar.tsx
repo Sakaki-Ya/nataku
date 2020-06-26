@@ -1,8 +1,8 @@
 import React from "react";
 import { toast, Slide } from "react-toastify";
-import signFunction from "../SignFunction";
-import style from "../styles/SignModal.module.scss";
-import temp from "../styles/Template.module.scss";
+import signFunction from "../../SignFunction";
+import style from "../../styles/HeaderStyle/SignSideBar.module.scss";
+import temp from "../../styles/ConfigStyle/Template.module.scss";
 
 type SignModalProps = {
   sign: string;
@@ -67,7 +67,6 @@ const SignModal: React.FC<SignModalProps> = ({ sign, setSign }) => {
     const SNSName = name as SNSType;
     const signStatus = await signFunction(SNSName);
     signStatus === "Sign Up" ? signUpAlert() : signInAlert();
-    setSign("");
   };
 
   return (

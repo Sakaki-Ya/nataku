@@ -16,15 +16,11 @@ const Posts: React.FC = () => {
     db.collection("posts").orderBy("createdAt").limit(15)
   )[0];
 
-  const posts = postsArray?.map((postObj, index) => {
-    return <Post postsArray={postsArray} postObj={postObj} key={index} />;
-  });
+  const posts = postsArray?.map((postObj, index) => (
+    <Post postsArray={postsArray} postObj={postObj} key={index} />
+  ));
 
-  return (
-    <main className={style.post__wrap}>
-      <div>{posts}</div>
-    </main>
-  );
+  return <main className={style.post__wrap}>{posts}</main>;
 };
 
 export default Posts;

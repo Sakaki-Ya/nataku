@@ -1,6 +1,6 @@
 import React from "react";
 import logoType from "../../img/logoType.svg";
-import style from "../../styles/Menu/About.module.scss";
+import style from "../../styles/MenuStyle/About.module.scss";
 
 type SourceType = "Giphy" | "Tenor";
 

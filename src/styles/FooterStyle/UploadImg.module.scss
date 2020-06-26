@@ -1,0 +1,19 @@
+@import "../ConfigStyle/Colors.scss";
+
+.uploadImg__inputBtn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $deepGreen;
+  color: $white;
+  padding: 0.5rem;
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+  span {
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+}

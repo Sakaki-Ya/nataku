@@ -1,4 +1,4 @@
-@import "./Colors.scss";
+@import "./ConfigStyle/Colors.scss";
 
 body {
   background-color: $black;
@@ -39,30 +39,28 @@ label {
   }
 }
 
+.alertBase {
+  color: $white;
+  font-weight: bold;
+  text-align: center;
+}
+.Toastify__toast--default {
+  @extend .alertBase;
+  background-color: steelblue;
+}
 .Toastify__toast--success {
   background-color: $deepGreen;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }
-
 .Toastify__toast--info {
   background-color: $deepSalmon;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }
-
 .Toastify__toast--warning {
   background-color: black;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }
-
 .Toastify__toast--error {
   background-color: red;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }

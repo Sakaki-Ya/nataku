@@ -1,4 +1,4 @@
-@import "./Colors.scss";
+@import "../ConfigStyle/Colors.scss";
 
 .user__contents {
   position: fixed;
@@ -28,7 +28,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 5px;
   width: 100%;
   margin-bottom: 1rem;
 }

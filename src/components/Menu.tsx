@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import SideBack from "./SideBack";
 import { CSSTransition } from "react-transition-group";
-import "../styles/Transition.scss";
-import style from "../styles/Menu/Menu.module.scss";
-import temp from "../styles/Template.module.scss";
+import "../styles/ConfigStyle/Transition.scss";
+import style from "../styles/Menu.module.scss";
+import temp from "../styles/ConfigStyle/Template.module.scss";
 import logoType from "../img/logoType.svg";
 import About from "./MenuComponents/About";
 import PrivacyPolicy from "./MenuComponents/PrivacyPolicy";
 import Contact from "./MenuComponents/Contact";
 
 type MenuType = "About" | "How to" | "Privacy Policy" | "Contact";
+const menuContent: MenuType[] = ["About", "Privacy Policy", "Contact"];
 
 const Menu: React.FC<{
+  menu: boolean;
   setMenu: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ setMenu }) => {
+}> = ({ menu, setMenu }) => {
   const [content, setContent] = useState("");
 
   const menuClose = () => {
@@ -20,15 +23,13 @@ const Menu: React.FC<{
     setContent("");
   };
 
-  const menu: MenuType[] = ["About", "Privacy Policy", "Contact"];
-
-  const SideMenu = menu.map((item, index) => (
+  const SideMenu = menuContent.map((item, index) => (
     <li key={index}>
       <button onClick={() => setContent(item)}>{item}</button>
     </li>
   ));
 
-  const SideText = menu.map((item, index) => {
+  const SideText = menuContent.map((item, index) => {
     const renderContent = (item: MenuType) => {
       switch (item) {
         case "About":
@@ -59,26 +60,39 @@ const Menu: React.FC<{
   });
 
   return (
-    <div className={style.menu__wrap}>
-      <div className={style.menu__contents}>
-        <img
-          onClick={menuClose}
-          className={style.menu__logo}
-          src={logoType}
-          alt="Nataku"
-        />
-        <ul className={style.menu__list}>{SideMenu}</ul>
-        <button
-          onClick={menuClose}
-          className={temp.greenUnderline}
-          style={{ marginBottom: "1rem" }}
-        >
-          Close
-        </button>
-        <p className={style.menu__copy}>&copy;2020 Nataku</p>
-      </div>
-      <div onClick={(e) => e.stopPropagation()}>{SideText}</div>
-    </div>
+    <>
+      <SideBack state={menu} setState={setMenu} />
+      <CSSTransition
+        in={menu}
+        classNames="sideLeft"
+        timeout={{
+          enter: 0,
+          exit: 500,
+        }}
+        unmountOnExit
+      >
+        <div className={style.menu__wrap}>
+          <div className={style.menu__contents}>
+            <img
+              onClick={menuClose}
+              className={style.menu__logo}
+              src={logoType}
+              alt="Nataku"
+            />
+            <ul className={style.menu__list}>{SideMenu}</ul>
+            <button
+              onClick={menuClose}
+              className={temp.greenUnderline}
+              style={{ marginBottom: "1rem" }}
+            >
+              Close
+            </button>
+            <p className={style.menu__copy}>&copy;2020 Nataku</p>
+          </div>
+          <div onClick={(e) => e.stopPropagation()}>{SideText}</div>
+        </div>
+      </CSSTransition>
+    </>
   );
 };
 

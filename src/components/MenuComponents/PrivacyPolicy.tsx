@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/Menu/PrivacyPolicy.module.scss";
+import style from "../../styles/MenuStyle/PrivacyPolicy.module.scss";
 
 const PrivacyPolicy: React.FC = () => {
   return (

@@ -1,0 +1,12 @@
+@import "../ConfigStyle/Colors.scss";
+
+.signBtn__signButtons {
+  display: flex;
+  align-items: center;
+}
+
+.signBtn__signIn {
+  color: $lightGreen;
+  text-decoration: underline;
+  margin-left: 1rem;
+}

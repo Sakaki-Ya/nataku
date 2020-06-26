@@ -20,7 +20,6 @@ const Post = ({ postsArray, postObj }: PostPartsType) => {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);
   }
-  console.log("hoge");
 
   const [
     userData,
