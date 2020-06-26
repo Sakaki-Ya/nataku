@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../Firebase";
+import { auth, db } from "./Functions/Firebase";
 import { useUpdate } from "../App";
 import style from "../styles/Post.module.scss";
 
@@ -16,6 +16,7 @@ type PostPartsType = {
 };
 
 const Post = ({ postsArray, postObj }: PostPartsType) => {
+  console.log("hoge");
   if (postsArray && postObj === postsArray[postsArray.length - 1]) {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);

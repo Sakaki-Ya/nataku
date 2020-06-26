@@ -1,5 +1,5 @@
 import React from "react";
-import { db } from "../Firebase";
+import { db } from "./Functions/Firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import style from "../styles/Post.module.scss";
 import Post from "./Post";

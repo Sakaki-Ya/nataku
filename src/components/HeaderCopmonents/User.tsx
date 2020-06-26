@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSetUpdate } from "../../App";
-import { auth, db, storage } from "../../Firebase";
-import { toast, Slide } from "react-toastify";
+import { auth, db, storage } from "../Functions/Firebase";
+import { blueAlert, blackAlert, redAlert } from "../Functions/Alert";
 import style from "../../styles/HeaderStyle/User.module.scss";
 import temp from "../../styles/ConfigStyle/Template.module.scss";
 import defaultAvatar from "../../img/logo.svg";
@@ -9,40 +9,6 @@ import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
 
 let inputName: string;
-
-const updateAlert = () =>
-  toast("Update", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
-const signOutAlert = () =>
-  toast.warning("Sign Out", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
-const deleteAccountAlert = () =>
-  toast.error("Delete Account", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
 
 const loaderStyle = css`
   margin-top: 1rem;
@@ -71,8 +37,8 @@ const User: React.FC<{
       photoURL: newAvatarURL,
     });
     setUploading(false);
-    setUpdate(true);
-    updateAlert();
+    setUpdate("avatar");
+    blueAlert("Update");
   };
 
   const saveName = async () => {
@@ -84,14 +50,14 @@ const User: React.FC<{
     currentUser.updateProfile({
       displayName: inputName,
     });
-    setUpdate(true);
-    updateAlert();
+    setUpdate("name");
+    blueAlert("Update");
   };
 
   const signOut = () => {
     if (!currentUser) return;
     auth.signOut();
-    signOutAlert();
+    blackAlert("Sign Out");
   };
 
   const deleteUser = async () => {
@@ -99,7 +65,7 @@ const User: React.FC<{
     await db.collection("users").doc(currentUser.uid).delete();
     currentUser.delete();
     auth.signOut();
-    deleteAccountAlert();
+    redAlert("Delete Account");
   };
 
   const avatar = currentUser?.photoURL;

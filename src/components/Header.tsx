@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../Firebase";
+import { auth } from "./Functions/Firebase";
 import Menu from "./Menu";
 import SignButtons from "./HeaderCopmonents/SignButtons";
 import UserButton from "./HeaderCopmonents/UserButton";

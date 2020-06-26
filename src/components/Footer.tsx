@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { functions } from "../Firebase";
+import { functions } from "./Functions/Firebase";
 import SearchResult from "./FooterComponents/SearchResult";
 import UploadImg from "./FooterComponents/UploadImg";
 import "slick-carousel/slick/slick.css";

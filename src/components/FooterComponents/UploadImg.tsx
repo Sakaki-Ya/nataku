@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { firebase, auth, db, storage } from "../../Firebase";
+import { firebase, auth, db, storage } from "../Functions/Firebase";
 import BarLoader from "react-spinners/BarLoader";
 import style from "../../styles/FooterStyle/UploadImg.module.scss";
 import { css } from "@emotion/core";

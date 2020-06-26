@@ -1,5 +1,5 @@
 import { firebase, auth, db } from "./Firebase";
-import defaultAvatar from "./img/logo.svg";
+import defaultAvatar from "../../img/logo.svg";
 
 type SNSType =
   | "Google"

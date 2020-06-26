@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "../../Firebase";
+import { db } from "../Functions/Firebase";
 import { toast, Slide } from "react-toastify";
 import style from "../../styles/MenuStyle/Contact.module.scss";
 import temp from "../../styles/ConfigStyle/Template.module.scss";
