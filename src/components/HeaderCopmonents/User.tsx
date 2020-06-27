@@ -4,7 +4,7 @@ import { auth, db, storage } from "../Functions/Firebase";
 import { blueAlert, blackAlert, redAlert } from "../Functions/Alert";
 import style from "../../styles/HeaderStyle/User.module.scss";
 import temp from "../../styles/ConfigStyle/Template.module.scss";
-import defaultAvatar from "../../img/logo.svg";
+import defaultAvatar from "../../img/defaultAvatar.svg";
 import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
 

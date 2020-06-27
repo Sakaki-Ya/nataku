@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { firebase, auth, db, storage } from "../Functions/Firebase";
-import BarLoader from "react-spinners/BarLoader";
 import style from "../../styles/FooterStyle/UploadImg.module.scss";
-import { css } from "@emotion/core";
 
-const loaderStyle = css`
-  margin: auto;
-`;
-
-const UploadeImg: React.FC = () => {
+const UploadeImg: React.FC<{
+  setUploading: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setUploading }) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   useEffect(() => {
     auth.onAuthStateChanged((user) => setCurrentUser(user));
   }, []);
 
-  const [uploading, setUploading] = useState(false);
   const uploadImg = async (file: FileList | null) => {
     if (!file) return;
     setUploading(true);
@@ -45,13 +40,6 @@ const UploadeImg: React.FC = () => {
         <p>&#x2b06;</p>
         <span>Upload</span>
       </label>
-      <BarLoader
-        css={loaderStyle}
-        width={200}
-        height={12}
-        color={"#3ab549"}
-        loading={uploading}
-      />
     </>
   );
 };

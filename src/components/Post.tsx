@@ -16,7 +16,6 @@ type PostPartsType = {
 };
 
 const Post = ({ postsArray, postObj }: PostPartsType) => {
-  console.log("hoge");
   if (postsArray && postObj === postsArray[postsArray.length - 1]) {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);

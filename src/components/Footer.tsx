@@ -4,8 +4,14 @@ import SearchResult from "./FooterComponents/SearchResult";
 import UploadImg from "./FooterComponents/UploadImg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import BarLoader from "react-spinners/BarLoader";
+import { css } from "@emotion/core";
 import style from "../styles/Footer.module.scss";
 import temp from "../styles/ConfigStyle/Template.module.scss";
+
+const loaderStyle = css`
+  margin: auto;
+`;
 
 type SourceType = "Giphy" | "Tenor";
 const searchSources: SourceType[] = ["Giphy", "Tenor"];
@@ -53,8 +59,17 @@ const Footer: React.FC = () => {
     }, 300);
   };
 
+  const [uploading, setUploading] = useState(false);
+
   return (
     <footer className={style.footer__wrap}>
+      <BarLoader
+        css={loaderStyle}
+        width={200}
+        height={12}
+        color={"#3ab549"}
+        loading={uploading}
+      />
       {res !== [] && (
         <SearchResult res={res} setRes={setRes} inputRef={inputRef} />
       )}
@@ -71,7 +86,7 @@ const Footer: React.FC = () => {
           }
           type="text"
         />
-        <UploadImg />
+        <UploadImg setUploading={setUploading} />
       </div>
     </footer>
   );

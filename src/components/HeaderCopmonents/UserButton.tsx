@@ -4,7 +4,7 @@ import { CSSTransition } from "react-transition-group";
 import "../../styles/ConfigStyle/Transition.scss";
 import User from "./User";
 import style from "../../styles/HeaderStyle/UserButton.module.scss";
-import defaultAvatar from "../../img/logo.svg";
+import defaultAvatar from "../../img/defaultAvatar.svg";
 
 const UserButton: React.FC<{ currentUser: firebase.User | null }> = ({
   currentUser,

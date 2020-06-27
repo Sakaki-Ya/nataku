@@ -1,7 +1,11 @@
 @import "./ConfigStyle/Colors.scss";
 
 body {
-  background-color: $black;
+  background: $black;
+  background: -moz-linear-gradient(top, $black 0%, #121416 100%);
+  background: -webkit-linear-gradient(top, $black 0%, #121416 100%);
+  background: linear-gradient(to bottom, $black 0%, #121416 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$black', endColorstr='#121416',GradientType=0 );
   color: $white;
   margin: 0;
   min-height: 100vh;
