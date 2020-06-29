@@ -5,13 +5,14 @@ import "firebase/storage";
 import "firebase/functions";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  appId: process.env.REACT_APP_APP_ID,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  apiKey: "AIzaSyAEFfVnQAWzjJKdgBhKLLnHJ8xE3ji2Zt8",
+  authDomain: "nataku-13968.firebaseapp.com",
+  databaseURL: "https://nataku-13968.firebaseio.com",
+  projectId: "nataku-13968",
+  storageBucket: "nataku-13968.appspot.com",
+  messagingSenderId: "716770121125",
+  appId: "1:716770121125:web:69f0c9c05640db91ec444c",
+  measurementId: "G-1NREN7VBXV",
 };
 
 firebase.initializeApp(firebaseConfig);
