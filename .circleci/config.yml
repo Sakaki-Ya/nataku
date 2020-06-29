@@ -2,22 +2,16 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  build-deploy:
+  build-and-test:
     executor:
       name: node/default
     steps:
       - checkout
       - node/with-cache:
           steps:
-            - run: yarn && cd functions && npm i
-            - run: yarn build
-            - run: yarn add --dev firebase-tools
-            - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+            - run: npm install
+            - run: npm test
 workflows:
-  build-deploy:
-    jobs:
-      - build-deploy:
-          filters:
-            branches:
-              only:
-                - master
+    build-and-test:
+      jobs:
+        - build-and-test
