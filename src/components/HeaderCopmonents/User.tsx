@@ -1,54 +1,39 @@
 import React, { useState } from "react";
-import { auth, db, storage } from "../Firebase";
-import { toast, Slide } from "react-toastify";
-import style from "../styles/User.module.scss";
-import temp from "../styles/Template.module.scss";
-import defaultAvatar from "../img/logo.svg";
+import { useSetUpdate } from "../../App";
+import { auth, db, storage } from "../Functions/Firebase";
+import { blueAlert, blackAlert, redAlert } from "../Functions/Alert";
+import style from "../../styles/HeaderStyle/User.module.scss";
+import temp from "../../styles/ConfigStyle/Template.module.scss";
+import defaultAvatar from "../../img/defaultAvatar.svg";
 import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/core";
+import Resizer from "react-image-file-resizer";
 
 let inputName: string;
-
-const signOutAlert = () =>
-  toast.warning("Sign Out", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
-const deleteAccountAlert = () =>
-  toast.error("Delete Account", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
 
 const loaderStyle = css`
   margin-top: 1rem;
 `;
+
+const checkType = (url: any) => {
+  const type = url.slice(((url.lastIndexOf(".") - 1) >>> 0) + 2).toLowerCase();
+  if (type === "png") return "PNG";
+  return "JPEG";
+};
 
 const User: React.FC<{
   setUserSide: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ setUserSide }) => {
   const currentUser = auth.currentUser;
 
-  const [avatar, setAvatar] = useState(currentUser?.photoURL);
+  const setUpdate = useSetUpdate();
+
   const [uploading, setUploading] = useState(false);
-  const changeAvatar = async (file: FileList | null) => {
-    if (!file || !currentUser) return;
+  const uploadAvatar = async (blob: any) => {
+    if (!blob || !currentUser) return;
     setUploading(true);
     const avatarRef = await storage.ref().child("avatar/" + currentUser.uid);
-    const newAvatar = file[0];
-    await avatarRef.put(newAvatar);
+    await avatarRef.put(blob);
     const newAvatarURL = await avatarRef.getDownloadURL();
     const currentUserDoc = await db.collection("users").doc(currentUser.uid);
     await currentUserDoc.update({
@@ -57,8 +42,25 @@ const User: React.FC<{
     await currentUser.updateProfile({
       photoURL: newAvatarURL,
     });
-    setAvatar(currentUser.photoURL);
     setUploading(false);
+    setUpdate(Math.random());
+    blueAlert("Update");
+  };
+  const resizeAvatar = async (file: FileList | null) => {
+    if (!file) return;
+    const img = file[0];
+    Resizer.imageFileResizer(
+      img,
+      300,
+      300,
+      checkType(img.name),
+      100,
+      0,
+      (uri) => {
+        uploadAvatar(uri);
+      },
+      "blob"
+    );
   };
 
   const saveName = async () => {
@@ -70,12 +72,14 @@ const User: React.FC<{
     currentUser.updateProfile({
       displayName: inputName,
     });
+    setUpdate(Math.random());
+    blueAlert("Update");
   };
 
   const signOut = () => {
     if (!currentUser) return;
     auth.signOut();
-    signOutAlert();
+    blackAlert("Sign Out");
   };
 
   const deleteUser = async () => {
@@ -83,9 +87,10 @@ const User: React.FC<{
     await db.collection("users").doc(currentUser.uid).delete();
     currentUser.delete();
     auth.signOut();
-    deleteAccountAlert();
+    redAlert("Delete Account");
   };
 
+  const avatar = currentUser?.photoURL;
   const name = currentUser?.displayName;
 
   return (
@@ -98,7 +103,7 @@ const User: React.FC<{
             alt="Avatar"
           />
           <input
-            onChange={(e) => changeAvatar(e.target.files)}
+            onChange={(e) => resizeAvatar(e.target.files)}
             accept="image/*"
             type="file"
             id="changeImage"
@@ -123,6 +128,7 @@ const User: React.FC<{
             defaultValue={name ? name : "Anonymous"}
             type="text"
             placeholder="Your name"
+            aria-label="change name"
           />
         </div>
         <div className={style.user__buttons}>

@@ -1,5 +1,5 @@
 import { firebase, auth, db } from "./Firebase";
-import defaultAvatar from "./img/logo.svg";
+import defaultAvatar from "../../img/logo.svg";
 
 type SNSType =
   | "Google"
@@ -50,18 +50,12 @@ const signFucntion = async (name: SNSType) => {
   if (!currentUser) return;
   let docRef = await db.collection("users").doc(currentUser.uid);
   let doc = await docRef.get();
-  if (doc.exists) {
-    // sign in
-    return "Sign In";
-  }
-  // sign up
+  if (doc.exists) return "Sign In";
   const userName = currentUser.displayName;
   const avatar = currentUser.photoURL;
-  const email = currentUser.email;
   await docRef.set({
     name: userName ? userName : "Anonymous",
     avatar: avatar ? avatar : defaultAvatar,
-    email: email ? email : "",
     uid: currentUser.uid,
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });

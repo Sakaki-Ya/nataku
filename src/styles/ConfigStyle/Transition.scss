@@ -39,7 +39,7 @@
 
 // menu content
 .menu-enter-active {
-  transform: translateX(-100vw);
+  transform: translateX(-50vw);
   opacity: 0;
 }
 .menu-enter-done {
@@ -48,7 +48,7 @@
   transition: 0.3s;
 }
 .menu-exit-active {
-  transform: translateX(-100vw);
+  transform: translateX(-50vw);
   opacity: 0;
   transition: 0.3s;
 }

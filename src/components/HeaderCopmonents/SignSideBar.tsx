@@ -1,8 +1,8 @@
 import React from "react";
-import { toast, Slide } from "react-toastify";
-import signFunction from "../SignFunction";
-import style from "../styles/SignModal.module.scss";
-import temp from "../styles/Template.module.scss";
+import { greenAlert, orangeAlert } from "../Functions/Alert";
+import signFunction from "../Functions/SignFunction";
+import style from "../../styles/HeaderStyle/SignSideBar.module.scss";
+import temp from "../../styles/ConfigStyle/Template.module.scss";
 
 type SignModalProps = {
   sign: string;
@@ -26,29 +26,6 @@ const SNS: SNSType[] = [
   "Microsoft",
 ];
 
-const signUpAlert = () =>
-  toast.success("Sign Up", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
-const signInAlert = () =>
-  toast.info("Sign In", {
-    position: "bottom-center",
-    autoClose: 1500,
-    transition: Slide,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
-
 const SignModal: React.FC<SignModalProps> = ({ sign, setSign }) => {
   const SNSBUtton = SNS.map((item, index) => (
     <div className={style.sign__SNSButtons} key={index}>
@@ -66,8 +43,7 @@ const SignModal: React.FC<SignModalProps> = ({ sign, setSign }) => {
     const { name } = e.currentTarget;
     const SNSName = name as SNSType;
     const signStatus = await signFunction(SNSName);
-    signStatus === "Sign Up" ? signUpAlert() : signInAlert();
-    setSign("");
+    signStatus === "Sign Up" ? greenAlert("Sign Up") : orangeAlert("Sign In");
   };
 
   return (

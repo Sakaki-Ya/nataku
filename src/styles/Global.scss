@@ -1,7 +1,11 @@
-@import "./Colors.scss";
+@import "./ConfigStyle/Colors.scss";
 
 body {
-  background-color: $black;
+  background: $black;
+  background: -moz-linear-gradient(top, $black 0%, #121416 100%);
+  background: -webkit-linear-gradient(top, $black 0%, #121416 100%);
+  background: linear-gradient(to bottom, $black 0%, #121416 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$black', endColorstr='#121416',GradientType=0 );
   color: $white;
   margin: 0;
   min-height: 100vh;
@@ -39,30 +43,28 @@ label {
   }
 }
 
+.alertBase {
+  color: $white;
+  font-weight: bold;
+  text-align: center;
+}
+.Toastify__toast--default {
+  @extend .alertBase;
+  background-color: steelblue;
+}
 .Toastify__toast--success {
   background-color: $deepGreen;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }
-
 .Toastify__toast--info {
   background-color: $deepSalmon;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }
-
 .Toastify__toast--warning {
   background-color: black;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }
-
 .Toastify__toast--error {
   background-color: red;
-  color: $white;
-  font-weight: bold;
-  text-align: center;
+  @extend .alertBase;
 }

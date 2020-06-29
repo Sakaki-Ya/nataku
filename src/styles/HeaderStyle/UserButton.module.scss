@@ -1,0 +1,19 @@
+@import "../ConfigStyle/Colors.scss";
+
+.userBtn__user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $white;
+  font-size: 0.75rem;
+}
+
+.userBtn__avatar {
+  max-width: 50px;
+  max-height: 50px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  margin-bottom: 0.25rem;
+}

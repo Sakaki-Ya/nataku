@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { db } from "../../Firebase";
+import { db } from "../Functions/Firebase";
 import { toast, Slide } from "react-toastify";
-import style from "../../styles/Menu/Contact.module.scss";
-import temp from "../../styles/Template.module.scss";
+import style from "../../styles/MenuStyle/Contact.module.scss";
+import temp from "../../styles/ConfigStyle/Template.module.scss";
 
 const submitAlert = () =>
   toast.info("Submit Message", {
