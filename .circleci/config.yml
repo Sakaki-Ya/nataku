@@ -9,9 +9,9 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm i
-            - run: npm run build
-            - run: npm i --save-dev firebase-tools
+            - run: yarn && cd functions && npm i
+            - run: yarn build
+            - run: yarn add --dev firebase-tools
             - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 workflows:
   build-deploy:
