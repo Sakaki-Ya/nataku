@@ -11,13 +11,13 @@ jobs:
           steps:
             - run: npm i
             - run: npm run build
-            - run: npm i --save-dev firebase-tools
-            - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+            # - run: npm i --save-dev firebase-tools
+            # - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 workflows:
   build-deploy:
     jobs:
       - build-deploy:
-          filters:
-            branches:
-              only:
-                - master
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
