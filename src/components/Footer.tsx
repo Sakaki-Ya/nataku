@@ -21,18 +21,15 @@ let sourceName = "Giphy";
 
 const Footer: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const changePlaceHolder = (e: { currentTarget: { id: string } }) => {
+    sourceName = e.currentTarget.id;
+    if (inputRef.current)
+      inputRef.current.placeholder = "Search (Powered by " + sourceName + ")";
+  };
   const SearchSource = searchSources.map((source: SourceType, index) => (
-    <div
-      className={`${style.footer__selectButton} ${style[source]}`}
-      key={index}
-    >
+    <div className={style.footer__selectButton} key={index}>
       <input
-        onClick={(e) => {
-          sourceName = e.currentTarget.id;
-          if (inputRef.current)
-            inputRef.current.placeholder =
-              "Search (Powered by " + sourceName + ")";
-        }}
+        onClick={changePlaceHolder}
         id={source}
         type="radio"
         name="sourceSelect"
@@ -85,6 +82,7 @@ const Footer: React.FC = () => {
               : "Search (Powerd by Giphy)"
           }
           type="text"
+          aria-label="search gif form"
         />
         <UploadImg setUploading={setUploading} />
       </div>

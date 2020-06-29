@@ -12,7 +12,7 @@ const settings = {
   dots: false,
   arrows: false,
   infinite: true,
-  centerMode: false,
+  centerMode: true,
   slidesToShow: 1,
   slidesToScroll: 1,
   variableWidth: true,

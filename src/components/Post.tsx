@@ -5,8 +5,6 @@ import style from "../styles/Post.module.scss";
 
 type PostType = {
   url: string;
-  avatar: string | null;
-  name: string | null;
   uid: string | undefined;
 };
 

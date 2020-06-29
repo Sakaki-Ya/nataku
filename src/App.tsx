@@ -9,9 +9,9 @@ import Posts from "./components/Posts";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const updateState = atom<"" | "avatar" | "name">({
+const updateState = atom({
   key: "update",
-  default: "",
+  default: Math.random(),
 });
 export const useUpdate = () => {
   const update = useRecoilValue(updateState);

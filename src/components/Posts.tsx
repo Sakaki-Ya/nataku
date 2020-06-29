@@ -6,8 +6,6 @@ import Post from "./Post";
 
 type PostType = {
   url: string;
-  avatar: string | null;
-  name: string | null;
   uid: string | undefined;
 };
 
