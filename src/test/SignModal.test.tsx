@@ -1,11 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Header from "../components/Header";
+import SignButtons from "../components/HeaderCopmonents/SignButtons";
 // import { firebase } from "../Firebase";
 
 describe("Sign events", () => {
   test("simulate click button", () => {
-    const wrapper = shallow(<Header />);
+    const wrapper = shallow(<SignButtons />);
     expect(wrapper.find("button").text()).toBe("Sign Up");
   });
 });
