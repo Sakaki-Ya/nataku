@@ -15,7 +15,11 @@ const UserButton: React.FC<{ currentUser: firebase.User | null }> = ({
 
   return (
     <>
-      <button className={style.userBtn__user} onClick={() => setUserSide(true)}>
+      <button
+        className={style.userBtn__user}
+        onClick={() => setUserSide(true)}
+        name="open user button"
+      >
         <img
           className={style.userBtn__avatar}
           src={avatar ? avatar : defaultAvatar}

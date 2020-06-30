@@ -19,7 +19,11 @@ const SideBack: React.FC<SideBackType> = ({ state, setState }) => {
       }}
       unmountOnExit
     >
-      <div onClick={() => setState(!state)} className={temp.sideBackground} />
+      <div
+        onClick={() => setState(!state)}
+        className={temp.sideBackground}
+        aria-label="side bar background"
+      />
     </CSSTransition>
   );
 };
