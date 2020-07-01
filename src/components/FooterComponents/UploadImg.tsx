@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { firebase, auth, db, storage } from "../Functions/Firebase";
+import { redAlert } from "../Functions/Alert";
 import style from "../../styles/FooterStyle/UploadImg.module.scss";
 
 const UploadeImg: React.FC<{
@@ -12,6 +13,8 @@ const UploadeImg: React.FC<{
 
   const uploadImg = async (file: FileList | null) => {
     if (!file) return;
+    if (!file[0].type.match("image.*"))
+      return redAlert("It is not an image file.");
     setUploading(true);
     const date = new Date().getTime().toString();
     const uploadRef = await storage.ref().child("posts/" + date);
@@ -33,6 +36,7 @@ const UploadeImg: React.FC<{
       <input
         onChange={(e) => uploadImg(e.target.files)}
         type="file"
+        accept="image/*"
         id="upload"
         hidden
       />

@@ -48,6 +48,8 @@ const User: React.FC<{
   };
   const resizeAvatar = async (file: FileList | null) => {
     if (!file) return;
+    if (!file[0].type.match("image.*"))
+      return redAlert("It is not an image file.");
     const img = file[0];
     Resizer.imageFileResizer(
       img,
