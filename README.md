@@ -22,8 +22,7 @@
 - UIカタログ（Storybook）
 
 # 使い方
-
-
+![demo](https://user-images.githubusercontent.com/48976713/86241223-80b91080-bbdd-11ea-8215-92efa02107ee.gif)
 
 ## 1. 画面最下部のテキストフォームにキーワードを入力します。
 ![1](https://user-images.githubusercontent.com/48976713/86224692-2cedfd80-bbc4-11ea-966b-43e588ca40ab.jpg)
