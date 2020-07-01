@@ -1,13 +1,12 @@
-const cypressTypeScriptPreprocessor = require("./cy-ts-preprocessor");
+import admin from "firebase-admin";
+import cypressTypeScriptPreprocessor from "./cy-ts-preprocessor";
+import { plugin } from "cypress-firebase";
 
 module.exports = (on) => {
   on("file:preprocessor", cypressTypeScriptPreprocessor);
 };
 
-const admin = require("firebase-admin");
-const cypressFirebasePlugin = require("cypress-firebase").plugin;
-
 module.exports = (on, config) => {
-  const extendedConfig = cypressFirebasePlugin(on, config, admin);
+  const extendedConfig = plugin(on, config, admin);
   return extendedConfig;
 };

@@ -1,6 +1,7 @@
 describe("Header component test", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/");
+    cy.logout();
   });
 
   it("SignSideBar title test", () => {

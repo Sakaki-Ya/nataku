@@ -7,9 +7,9 @@ describe("User compoennt test", () => {
     cy.get('button[name="open user button"]').click();
   });
 
-  it("Change avatar", () => {
+  it("Change name", () => {
     cy.get('input[aria-label="change name"]').clear().type("Test");
-    cy.get('button[name="name save"]').click();
+    cy.contains("Save").click();
     cy.callFirestore("set", `test_user/${TEST_UID}`, {
       name: "Test",
     });
@@ -19,12 +19,12 @@ describe("User compoennt test", () => {
   });
 
   it("Sign out", () => {
-    cy.get('button[name="sign out"]').click();
+    cy.contains("Sign Out").click();
     cy.get('input[aria-label="change name"]').should("not.exist");
   });
 
   it("Delete Account", () => {
-    cy.get('button[name="delete account"]').click();
+    cy.contains("Delete Account").click();
     cy.callFirestore("delete", `test_user/${TEST_UID}`);
     cy.callFirestore("get", `test_user/${TEST_UID}`).then((r: any) => {
       cy.wrap(r).its("name").should("not.exist");
@@ -32,7 +32,7 @@ describe("User compoennt test", () => {
   });
 
   it("Close user side bar", () => {
-    cy.get('button[name="close user side bar"]').click();
+    cy.contains("Close").click();
     cy.get('button[name="open user button"]').click();
     cy.get('div[aria-label="side bar background"]').click();
     cy.get('input[aria-label="change name"]').should("not.exist");
