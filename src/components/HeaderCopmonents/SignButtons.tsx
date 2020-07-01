@@ -18,6 +18,7 @@ const SignButtons: React.FC = () => {
         className={
           item === "Sign Up" ? temp.greenButton : style.signBtn__signIn
         }
+        name={item}
       >
         {item}
       </button>

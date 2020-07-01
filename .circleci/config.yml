@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  cypress: cypress-io/cypress@1
 jobs:
   build-deploy:
     executor:
@@ -16,6 +17,8 @@ jobs:
 workflows:
   build-deploy:
     jobs:
+      - cypress/install
+      - cypress/run
       - build-deploy:
           filters:
             branches:

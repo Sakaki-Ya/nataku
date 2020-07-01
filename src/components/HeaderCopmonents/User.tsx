@@ -133,23 +133,36 @@ const User: React.FC<{
         </div>
         <div className={style.user__buttons}>
           <div className={style.user__saveClose}>
-            <button onClick={saveName} className={style.user__save}>
+            <button
+              onClick={saveName}
+              className={style.user__save}
+              name="name save"
+            >
               Save
             </button>
             <button
               onClick={() => setUserSide(false)}
               className={style.user__close}
+              name="close user side bar"
             >
               Close
             </button>
           </div>
           <div>
-            <button onClick={signOut} className={style.user__signOut}>
+            <button
+              onClick={signOut}
+              className={style.user__signOut}
+              name="sign out"
+            >
               Sign Out
             </button>
           </div>
           <div>
-            <button onClick={deleteUser} className={style.user__delete}>
+            <button
+              onClick={deleteUser}
+              className={style.user__delete}
+              name="delete account"
+            >
               Delete Account
             </button>
           </div>
