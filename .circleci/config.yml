@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
   cypress: cypress-io/cypress@1
+
 jobs:
   build-deploy:
     executor:
@@ -14,12 +15,18 @@ jobs:
             - run: yarn build
             - run: yarn add --dev firebase-tools
             - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+
 workflows:
   build-deploy:
     jobs:
-      - cypress/install
-      - cypress/run
+      # - cypress/run:
+      #     yarn: true
+      #     start: yarn start
+      #     wait-on: "http://localhost:3000"
+      #     no-workspace: true
       - build-deploy:
+          # requires:
+          #   - cypress/run
           filters:
             branches:
               only:
