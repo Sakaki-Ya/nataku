@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import SignSideBar from "./SignSideBar";
 import { CSSTransition } from "react-transition-group";
 import "../../styles/ConfigStyle/Transition.scss";
@@ -8,7 +8,7 @@ import temp from "../../styles/ConfigStyle/Template.module.scss";
 type formType = "Sign Up" | "Sign In";
 const forms: formType[] = ["Sign Up", "Sign In"];
 
-const SignButtons: React.FC = () => {
+const SignButtons: React.FC = memo(() => {
   const [sign, setSign] = useState("");
 
   const SignButton = forms.map((item: formType, index) => (
@@ -52,6 +52,6 @@ const SignButtons: React.FC = () => {
       </CSSTransition>
     </>
   );
-};
+});
 
 export default SignButtons;

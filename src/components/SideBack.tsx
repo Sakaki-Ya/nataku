@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { CSSTransition } from "react-transition-group";
 import "../styles/ConfigStyle/Transition.scss";
 import temp from "../styles/ConfigStyle/Template.module.scss";
@@ -8,7 +8,7 @@ type SideBackType = {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SideBack: React.FC<SideBackType> = ({ state, setState }) => {
+const SideBack: React.FC<SideBackType> = memo(({ state, setState }) => {
   return (
     <CSSTransition
       in={state}
@@ -26,6 +26,6 @@ const SideBack: React.FC<SideBackType> = ({ state, setState }) => {
       />
     </CSSTransition>
   );
-};
+});
 
 export default SideBack;

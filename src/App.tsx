@@ -1,5 +1,5 @@
-import React from "react";
-import { RecoilRoot, atom, useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useCallback } from "react";
+import { RecoilRoot, atom, useRecoilState } from "recoil";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "reset-css";
@@ -14,15 +14,17 @@ const updateState = atom({
   default: Math.random(),
 });
 export const useUpdate = () => {
-  const update = useRecoilValue(updateState);
-  return update;
-};
-export const useSetUpdate = () => {
-  const setUpdate = useSetRecoilState(updateState);
-  return setUpdate;
+  const [update, setRandom] = useRecoilState(updateState);
+  const setUpdate = useCallback(
+    (num: number) => {
+      setRandom(num);
+    },
+    [setRandom]
+  );
+  return [update, setUpdate] as const;
 };
 
-const App = () => (
+const App: React.FC = () => (
   <div className={style.app__wrap}>
     <RecoilRoot>
       <Posts />

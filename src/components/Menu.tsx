@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import SideBack from "./SideBack";
 import { CSSTransition } from "react-transition-group";
 import "../styles/ConfigStyle/Transition.scss";
@@ -12,10 +12,12 @@ import Contact from "./MenuComponents/Contact";
 type MenuType = "About" | "How to" | "Privacy Policy" | "Contact";
 const menuContent: MenuType[] = ["About", "Privacy Policy", "Contact"];
 
-const Menu: React.FC<{
+type MenuPropsType = {
   menu: boolean;
   setMenu: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ menu, setMenu }) => {
+};
+
+const Menu: React.FC<MenuPropsType> = memo(({ menu, setMenu }) => {
   const [content, setContent] = useState("");
 
   const menuClose = () => {
@@ -94,6 +96,6 @@ const Menu: React.FC<{
       </CSSTransition>
     </>
   );
-};
+});
 
 export default Menu;

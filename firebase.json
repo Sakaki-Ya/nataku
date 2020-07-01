@@ -17,13 +17,6 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "redirects": [
-      {
-        "source": "**",
-        "destination": "https://nataku.cloud",
-        "type": 301
-      }
     ]
   },
   "storage": {

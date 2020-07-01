@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { auth, db } from "./Functions/Firebase";
 import { useUpdate } from "../App";
 import style from "../styles/Post.module.scss";
@@ -13,7 +13,7 @@ type PostPartsType = {
   postObj: PostType;
 };
 
-const Post = ({ postsArray, postObj }: PostPartsType) => {
+const Post: React.FC<PostPartsType> = memo(({ postsArray, postObj }) => {
   if (postsArray && postObj === postsArray[postsArray.length - 1]) {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);
@@ -23,7 +23,7 @@ const Post = ({ postsArray, postObj }: PostPartsType) => {
     userData,
     setUserData,
   ] = useState<firebase.firestore.DocumentData | null>();
-  const update = useUpdate();
+  const update = useUpdate()[0];
   useEffect(() => {
     if (!postObj.uid) return;
     (async () => {
@@ -55,6 +55,6 @@ const Post = ({ postsArray, postObj }: PostPartsType) => {
       )}
     </div>
   );
-};
+});
 
 export default Post;
