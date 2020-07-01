@@ -22,7 +22,6 @@ workflows:
       - cypress/run:
           yarn: true
           start: yarn start
-          wait-on: "http://localhost:3000"
           no-workspace: true
       - build-deploy:
           requires:
