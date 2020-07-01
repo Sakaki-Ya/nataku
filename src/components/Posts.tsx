@@ -11,12 +11,14 @@ type PostType = {
 
 const Posts: React.FC = () => {
   const postsArray = useCollectionData<PostType>(
-    db.collection("posts").orderBy("createdAt").limit(15)
+    db.collection("posts").orderBy("createdAt", "desc").limit(15)
   )[0];
 
-  const posts = postsArray?.map((postObj, index) => (
-    <Post postsArray={postsArray} postObj={postObj} key={index} />
-  ));
+  const posts = postsArray
+    ?.reverse()
+    .map((postObj, index) => (
+      <Post postsArray={postsArray} postObj={postObj} key={index} />
+    ));
 
   return <main className={style.post__wrap}>{posts}</main>;
 };
