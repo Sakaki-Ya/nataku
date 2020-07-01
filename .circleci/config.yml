@@ -17,18 +17,16 @@ jobs:
             - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
-  test-build-deploy:
+  build-deploy:
     jobs:
-      - cypress/run:
-          yarn: true
-          executor: cypress/browsers-chrome69
-          browser: chrome
-          start: yarn start
-          wait-on: "http://localhost:3000"
-          no-workspace: true
+      # - cypress/run:
+      #     yarn: true
+      #     start: yarn start
+      #     wait-on: "http://localhost:3000"
+      #     no-workspace: true
       - build-deploy:
-          requires:
-            - cypress/run
+          # requires:
+          #   - cypress/run
           filters:
             branches:
               only:
