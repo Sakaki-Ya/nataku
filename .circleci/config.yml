@@ -17,6 +17,7 @@ jobs:
 workflows:
   build-deploy:
     jobs:
+      - cypress/install
       - cypress/run
       - build-deploy:
           filters:
