@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { db } from "./Functions/Firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import style from "../styles/Post.module.scss";
@@ -9,7 +9,7 @@ type PostType = {
   uid: string | undefined;
 };
 
-const Posts: React.FC = () => {
+const Posts: React.FC = memo(() => {
   const postsArray = useCollectionData<PostType>(
     db.collection("posts").orderBy("createdAt", "desc").limit(15)
   )[0];
@@ -21,6 +21,6 @@ const Posts: React.FC = () => {
     ));
 
   return <main className={style.post__wrap}>{posts}</main>;
-};
+});
 
 export default Posts;

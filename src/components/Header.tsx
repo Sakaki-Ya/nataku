@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { auth } from "./Functions/Firebase";
 import Menu from "./Menu";
 import SignButtons from "./HeaderCopmonents/SignButtons";
@@ -6,7 +6,7 @@ import UserButton from "./HeaderCopmonents/UserButton";
 import style from "../styles/Header.module.scss";
 import logo from "../img/logo.svg";
 
-const Header: React.FC = () => {
+const Header: React.FC = memo(() => {
   const [menu, setMenu] = useState(false);
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   useEffect(() => {
@@ -31,6 +31,6 @@ const Header: React.FC = () => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

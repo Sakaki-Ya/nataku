@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, memo } from "react";
 import { functions } from "./Functions/Firebase";
 import SearchResult from "./FooterComponents/SearchResult";
 import UploadImg from "./FooterComponents/UploadImg";
@@ -16,10 +16,10 @@ const loaderStyle = css`
 type SourceType = "Giphy" | "Tenor";
 const searchSources: SourceType[] = ["Giphy", "Tenor"];
 
-let getTimer: NodeJS.Timeout;
-let sourceName = "Giphy";
+let getTimer: NodeJS.Timeout,
+  sourceName = "Giphy";
 
-const Footer: React.FC = () => {
+const Footer: React.FC = memo(() => {
   const inputRef = useRef<HTMLInputElement>(null);
   const changePlaceHolder = (e: { currentTarget: { id: string } }) => {
     sourceName = e.currentTarget.id;
@@ -88,6 +88,6 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
+});
 
 export default Footer;

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { firebase, auth, db, storage } from "../Functions/Firebase";
 import { redAlert } from "../Functions/Alert";
 import style from "../../styles/FooterStyle/UploadImg.module.scss";
 
 const UploadeImg: React.FC<{
   setUploading: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ setUploading }) => {
+}> = memo(({ setUploading }) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   useEffect(() => {
     auth.onAuthStateChanged((user) => setCurrentUser(user));
@@ -46,6 +46,6 @@ const UploadeImg: React.FC<{
       </label>
     </>
   );
-};
+});
 
 export default UploadeImg;

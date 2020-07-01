@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSetUpdate } from "../../App";
+import React, { useState, memo } from "react";
+import { useUpdate } from "../../App";
 import { auth, db, storage } from "../Functions/Firebase";
 import { blueAlert, blackAlert, redAlert } from "../Functions/Alert";
 import style from "../../styles/HeaderStyle/User.module.scss";
@@ -23,10 +23,9 @@ const checkType = (url: any) => {
 
 const User: React.FC<{
   setUserSide: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ setUserSide }) => {
+}> = memo(({ setUserSide }) => {
   const currentUser = auth.currentUser;
-
-  const setUpdate = useSetUpdate();
+  const setUpdate = useUpdate()[1];
 
   const [uploading, setUploading] = useState(false);
   const uploadAvatar = async (blob: any) => {
@@ -66,7 +65,8 @@ const User: React.FC<{
   };
 
   const saveName = async () => {
-    if (!currentUser || !inputName) return;
+    if (!currentUser) return;
+    if (!inputName) return redAlert("Please enter at least one character.");
     const currentUserDoc = await db.collection("users").doc(currentUser.uid);
     await currentUserDoc.update({
       name: inputName,
@@ -172,6 +172,6 @@ const User: React.FC<{
       </div>
     </>
   );
-};
+});
 
 export default User;

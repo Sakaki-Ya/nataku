@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { greenAlert, orangeAlert } from "../Functions/Alert";
 import signFunction from "../Functions/SignFunction";
 import style from "../../styles/HeaderStyle/SignSideBar.module.scss";
@@ -26,7 +26,7 @@ const SNS: SNSType[] = [
   "Microsoft",
 ];
 
-const SignModal: React.FC<SignModalProps> = ({ sign, setSign }) => {
+const SignModal: React.FC<SignModalProps> = memo(({ sign, setSign }) => {
   const SNSBUtton = SNS.map((item, index) => (
     <div className={style.sign__SNSButtons} key={index}>
       <button
@@ -58,6 +58,6 @@ const SignModal: React.FC<SignModalProps> = ({ sign, setSign }) => {
       </div>
     </div>
   );
-};
+});
 
 export default SignModal;
