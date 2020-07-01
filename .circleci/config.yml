@@ -11,13 +11,13 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn && cd functions && npm i
-            - run: cypress/run
             - run: yarn build
             - run: yarn add --dev firebase-tools
             - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 workflows:
   build-deploy:
     jobs:
+      - cypress/run
       - build-deploy:
           filters:
             branches:
