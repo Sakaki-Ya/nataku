@@ -21,7 +21,10 @@ workflows:
     jobs:
       - cypress/run:
           yarn: true
+          executor: cypress/browsers-chrome69
+          browser: chrome
           start: yarn start
+          wait-on: "http://localhost:3000"
           no-workspace: true
       - build-deploy:
           requires:
