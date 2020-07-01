@@ -15,10 +15,11 @@ jobs:
             - run: yarn add --dev firebase-tools
             - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 workflows:
+  jobs:
+    - cypress/install
+    - cypress/run
   build-deploy:
     jobs:
-      - cypress/install
-      - cypress/run
       - build-deploy:
           filters:
             branches:
