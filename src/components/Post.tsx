@@ -13,7 +13,10 @@ type PostPartsType = {
   postObj: PostType;
 };
 
+let rend = 0;
+
 const Post: React.FC<PostPartsType> = memo(({ postsArray, postObj }) => {
+  console.log("post: " + rend++);
   if (postsArray && postObj === postsArray[postsArray.length - 1]) {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);
