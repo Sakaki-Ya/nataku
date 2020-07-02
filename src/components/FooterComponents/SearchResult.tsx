@@ -16,6 +16,7 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   variableWidth: true,
+  AdaptiveHeight: true,
 };
 
 type SearchResultType = {
@@ -61,7 +62,7 @@ const SearchResult: React.FC<SearchResultType> = memo(
               onMouseMove={() => (swipe = true)}
               onMouseUp={getGifURL}
               src={src}
-              className={style.footer__gif}
+              className={style.search__gif}
               alt="gif"
             />
           </div>
@@ -70,7 +71,7 @@ const SearchResult: React.FC<SearchResultType> = memo(
     );
 
     return (
-      <div className={style.footer__searchResult}>
+      <div className={style.search__wrap}>
         <Slider {...settings}>{searchResult}</Slider>
       </div>
     );
