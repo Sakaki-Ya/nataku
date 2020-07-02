@@ -1,5 +1,4 @@
 import React, { useState, memo } from "react";
-import { useUpdate } from "../../App";
 import { auth, db, storage } from "../Functions/Firebase";
 import { blueAlert, blackAlert, redAlert } from "../Functions/Alert";
 import style from "../../styles/HeaderStyle/User.module.scss";
@@ -25,7 +24,6 @@ const User: React.FC<{
   setUserSide: React.Dispatch<React.SetStateAction<boolean>>;
 }> = memo(({ setUserSide }) => {
   const currentUser = auth.currentUser;
-  const setUpdate = useUpdate()[1];
 
   const [uploading, setUploading] = useState(false);
   const uploadAvatar = async (blob: any) => {
@@ -42,7 +40,6 @@ const User: React.FC<{
       photoURL: newAvatarURL,
     });
     setUploading(false);
-    setUpdate(Math.random());
     blueAlert("Update");
   };
   const resizeAvatar = async (file: FileList | null) => {
@@ -74,7 +71,6 @@ const User: React.FC<{
     currentUser.updateProfile({
       displayName: inputName,
     });
-    setUpdate(Math.random());
     blueAlert("Update");
   };
 

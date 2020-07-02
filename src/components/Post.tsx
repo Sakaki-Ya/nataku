@@ -24,11 +24,11 @@ const Post: React.FC<PostPartsType> = memo(({ postsArray, postObj }) => {
   ] = useState<firebase.firestore.DocumentData | null>();
   useEffect(() => {
     if (!postObj.uid) return;
-    (async () => {
-      const userDoc = await db.collection("users").doc(postObj.uid).get();
-      const userDataRef = userDoc.data();
-      setUserData(userDataRef);
-    })();
+    db.collection("users")
+      .doc(postObj.uid)
+      .onSnapshot(async (doc) => {
+        setUserData(doc.data());
+      });
   }, [postObj.uid]);
 
   const [currentUser, setCurrentUser] = useState(auth.currentUser);

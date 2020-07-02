@@ -2861,6 +2861,13 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
+"@types/why-did-you-update@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@types/why-did-you-update/-/why-did-you-update-0.0.11.tgz#e0d2f3c6ac41c46111797255185631a18bffd200"
+  integrity sha512-SmQM6WgQ2I5FQFBZToZVb5rqMpZTZ/e7zynH+uPXM1H+D/1/QzF68CRcqpCIXpjT7jMZzG8SvWujvIpd2F2OoQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-15.0.0.tgz#cb3f9f741869e20cce330ffbeb9271590483882d"
