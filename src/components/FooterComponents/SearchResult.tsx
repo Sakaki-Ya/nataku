@@ -1,5 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import { firebase, db, auth } from "../Functions/Firebase";
+import { useUpdate } from "../../App";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -31,6 +32,7 @@ const SearchResult: React.FC<SearchResultType> = memo(
     useEffect(() => {
       auth.onAuthStateChanged((user) => setCurrentUser(user));
     }, []);
+    const setUpdate = useUpdate()[1];
 
     const getGifURL = async (
       e: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -46,6 +48,7 @@ const SearchResult: React.FC<SearchResultType> = memo(
         uid: currentUser ? currentUser.uid : null,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
+      setUpdate(Math.random());
       setRes([]);
       if (inputRef.current) inputRef.current.value = "";
     };
