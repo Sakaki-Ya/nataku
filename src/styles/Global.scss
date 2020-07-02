@@ -68,3 +68,8 @@ label {
   background-color: red;
   @extend .alertBase;
 }
+
+.slick-list,
+.slick-track {
+  height: 200px;
+}
