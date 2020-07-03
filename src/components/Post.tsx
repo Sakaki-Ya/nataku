@@ -1,6 +1,7 @@
-import React, { useEffect, useState, memo } from "react";
-import { auth, db } from "./Functions/Firebase";
+import React, { useEffect, useState, memo, useContext } from "react";
+import { db } from "./Functions/Firebase";
 import style from "../styles/Post.module.scss";
+import { AuthContext } from "./AuthContext";
 
 type PostType = {
   url: string;
@@ -13,10 +14,13 @@ type PostPartsType = {
 };
 
 const Post: React.FC<PostPartsType> = memo(({ postsArray, postObj }) => {
+  const { user } = useContext(AuthContext);
   if (postsArray && postObj === postsArray[postsArray.length - 1]) {
     const element = document.documentElement;
     setTimeout(() => element.scrollIntoView(false), 500);
   }
+
+  const isSignedInUser = user?.uid === postObj.uid;
 
   const [
     userData,
@@ -31,21 +35,12 @@ const Post: React.FC<PostPartsType> = memo(({ postsArray, postObj }) => {
       });
   }, [postObj.uid]);
 
-  const [currentUser, setCurrentUser] = useState(auth.currentUser);
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => setCurrentUser(user));
-  }, []);
-
   return (
     <div className={style.post__gifWrap}>
       <img className={style.post__gif} src={postObj.url} alt="post" />
       {userData && (
         <div
-          className={
-            currentUser?.uid === userData.uid
-              ? style.post__user
-              : style.post__notUser
-          }
+          className={isSignedInUser ? style.post__user : style.post__notUser}
         >
           <img src={userData.avatar} className={style.post__avatar} alt="" />
           <span className={style.post__name}>{userData.name}</span>
