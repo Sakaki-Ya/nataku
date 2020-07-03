@@ -3,14 +3,11 @@
 </div>
 
 # Nataku(ナタク)とは
-
 テキストを使わないチャットアプリケーションです。  
 テキストの代わりに画像を用います。  
 [Nataku](https://nataku.cloud)
 
 # 使用している主なライブラリやツール
-
-- Web フレームワーク（React）
 - TypeScript
 - データベース（Cloud Firestore)
 - API（Cloud Functions for Firebase）
@@ -22,30 +19,25 @@
 - UI カタログ（Storybook）
 
 # 使い方
-
 ![demo](https://user-images.githubusercontent.com/48976713/86241223-80b91080-bbdd-11ea-8215-92efa02107ee.gif)
 
 ## 1. 画面最下部のテキストフォームにキーワードを入力します。
-
 ![1](https://user-images.githubusercontent.com/48976713/86224692-2cedfd80-bbc4-11ea-966b-43e588ca40ab.jpg)
 
-Giphy ボタンと Tenor ボタンを押すことで、画像の取得元を選択できます。  
+GiphyボタンとTenorボタンを押すことで、画像の取得元を選択できます。  
 画像の取得元は下記の通りです。
-
-- Giphy ボタン: [Giphy](https://giphy.com/)
-- Tenor ボタン: [Tenor](https://tenor.com/)
+- Giphyボタン: [Giphy](https://giphy.com/)
+- Tenorボタン: [Tenor](https://tenor.com/)
 
 ## 2. キーワードに沿った画像が一覧として表示されます。
-
 ![2](https://user-images.githubusercontent.com/48976713/86224691-2bbcd080-bbc4-11ea-971f-5f9795c5b8a5.jpg)
 
 一覧をドラッグすることで、取得した画像を確認できます。
 
 ## 3. 一覧の内の画像をクリックすることで、画像がチャットに投稿されます。
-
 ![3](https://user-images.githubusercontent.com/48976713/86224687-2a8ba380-bbc4-11ea-9050-e5317a025343.jpg)
 
-また、画面最下部のテキストフォームの右端にある Upload ボタンを押すことで、ローカルの画像ファイルを投稿できます。
+また、画面最下部のテキストフォームの右端にあるUploadボタンを押すことで、ローカルの画像ファイルを投稿できます。
 
 ---
 
