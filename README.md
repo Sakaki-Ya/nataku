@@ -2,24 +2,21 @@
 <img src="https://user-images.githubusercontent.com/48976713/86219488-3f186d80-bbbd-11ea-8830-04b9c838d19a.png" alt="Nataku" title="Nataku">
 </div>
 
-
 # Nataku(ナタク)とは
 テキストを使わないチャットアプリケーションです。  
 テキストの代わりに画像を用います。  
 [Nataku](https://nataku.cloud)
 
 # 使用している主なライブラリやツール
-- Webフレームワーク（React）
 - TypeScript
 - データベース（Cloud Firestore)
 - API（Cloud Functions for Firebase）
 - ストレージ（Cloud Storage for Firebase）
 - ホスティング（Firebase Hosting）
-- グローバルステートの管理（Recoil）
 - アニメーション（React Transition Group）
 - テスト（Cypress）
 - ビルド・デプロイ（CircleCI）
-- UIカタログ（Storybook）
+- UI カタログ（Storybook）
 
 # 使い方
 ![demo](https://user-images.githubusercontent.com/48976713/86241223-80b91080-bbdd-11ea-8215-92efa02107ee.gif)
