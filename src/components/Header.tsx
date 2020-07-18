@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { auth } from "./Functions/Firebase";
 import Menu from "./Menu";
-import SignButtons from "./HeaderCopmonents/SignButtons";
-import UserButton from "./HeaderCopmonents/UserButton";
 import style from "../styles/Header.module.scss";
 import logo from "../img/logo.svg";
 
@@ -12,6 +10,11 @@ const Header: React.FC = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => setCurrentUser(user));
   }, []);
+
+  const HeaderButton = lazy(() => {
+    if (currentUser) return import("./HeaderCopmonents/UserButton");
+    return import("./HeaderCopmonents/SignButtons");
+  });
 
   return (
     <header className={style.header__wrap}>
@@ -23,11 +26,9 @@ const Header: React.FC = () => {
           alt="Nataku"
         />
         <Menu menu={menu} setMenu={setMenu} />
-        {!currentUser ? (
-          <SignButtons />
-        ) : (
-          <UserButton currentUser={currentUser} />
-        )}
+        <Suspense fallback="">
+          <HeaderButton currentUser={currentUser ? currentUser : null} />
+        </Suspense>
       </div>
     </header>
   );

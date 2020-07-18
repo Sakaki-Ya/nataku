@@ -36,7 +36,7 @@ const UserButton: React.FC<{ currentUser: firebase.User | null }> = memo(
           }}
           unmountOnExit
         >
-          <User setUserSide={setUserSide} />
+          <User currentUser={currentUser} setUserSide={setUserSide} />
         </CSSTransition>
       </>
     );
