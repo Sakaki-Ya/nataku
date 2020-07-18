@@ -24,8 +24,7 @@ const UploadeImg: React.FC<{
     const postsRef = await db.collection("posts").doc(date);
     await postsRef.set({
       url: uploadURL,
-      avatar: currentUser ? currentUser.photoURL : null,
-      name: currentUser ? currentUser.displayName : null,
+      uid: currentUser ? currentUser.uid : null,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setUploading(false);

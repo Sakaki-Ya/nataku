@@ -4,7 +4,6 @@ import { withA11y } from "@storybook/addon-a11y";
 
 import SignSideBar from "../components/HeaderCopmonents/SignSideBar";
 import User from "../components/HeaderCopmonents/User";
-import { auth } from "../components/Functions/Firebase";
 
 export default {
   component: Header,
@@ -17,6 +16,4 @@ export const Header_ = () => <Header />;
 export const SignUp = () => <SignSideBar sign={"Sign Up"} setSign={() => {}} />;
 export const SignIn = () => <SignSideBar sign={"Sign In"} setSign={() => {}} />;
 
-export const UserSideBar = () => (
-  <User currentUser={auth.currentUser} setUserSide={() => {}} />
-);
+export const UserSideBar = () => <User setUserSide={() => {}} />;

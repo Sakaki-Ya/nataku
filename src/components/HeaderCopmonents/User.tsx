@@ -21,9 +21,10 @@ const checkType = (url: string) => {
 };
 
 const User: React.FC<{
-  currentUser: firebase.User | null;
   setUserSide: React.Dispatch<React.SetStateAction<boolean>>;
-}> = memo(({ currentUser, setUserSide }) => {
+}> = memo(({ setUserSide }) => {
+  const currentUser = auth.currentUser;
+
   const [uploading, setUploading] = useState(false);
   const uploadAvatar = async (blob: any) => {
     if (!blob || !currentUser) return;
