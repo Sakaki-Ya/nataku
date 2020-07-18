@@ -14,7 +14,7 @@ const loaderStyle = css`
   margin-top: 1rem;
 `;
 
-const checkType = (url: any) => {
+const checkType = (url: string) => {
   const type = url.slice(((url.lastIndexOf(".") - 1) >>> 0) + 2).toLowerCase();
   if (type === "png") return "PNG";
   return "JPEG";

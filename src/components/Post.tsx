@@ -1,6 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
 import { auth, db } from "./Functions/Firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import style from "../styles/Post.module.scss";
 
 type PostObjType = {
@@ -30,8 +29,11 @@ const Post: React.FC<PostPropsType> = memo(({ postsArray, postObj }) => {
       .onSnapshot((doc) => setUserData(doc.data()));
   }, [postObj.uid]);
 
-  const user = useAuthState(auth)[0];
-  const isSignedInUser = user?.uid === postObj.uid;
+  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => setCurrentUser(user));
+  }, []);
+  const isSignedInUser = currentUser?.uid === postObj.uid;
 
   return (
     <div className={style.post__gifWrap}>

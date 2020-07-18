@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from "react";
+import React, { useState, useRef } from "react";
 import { functions } from "./Functions/Firebase";
 import SearchResult from "./FooterComponents/SearchResult";
 import UploadImg from "./FooterComponents/UploadImg";
@@ -19,7 +19,7 @@ const searchSources: SourceType[] = ["Giphy", "Tenor"];
 let getTimer: NodeJS.Timeout,
   sourceName = "Giphy";
 
-const Footer: React.FC = memo(() => {
+const Footer: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const changePlaceHolder = (e: { currentTarget: { id: string } }) => {
     sourceName = e.currentTarget.id;
@@ -88,6 +88,6 @@ const Footer: React.FC = memo(() => {
       </div>
     </footer>
   );
-});
+};
 
 export default Footer;
