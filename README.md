@@ -7,18 +7,18 @@
 テキストの代わりに画像を用います。  
 [Nataku](https://nataku.cloud)
 
-Firebaseや画像配信API、そのほか使用したことのないツールに触れるためにNatakuを制作しました。
+バックエンドの処理の学習とFirebaseに触れるために、Natakuを制作しました。
 
 # 使用している主なライブラリやツール
 - TypeScript
-- データベース（Cloud Firestore)
-- API（Cloud Functions for Firebase）
-- ストレージ（Cloud Storage for Firebase）
-- ホスティング（Firebase Hosting）
-- アニメーション（React Transition Group）
-- テスト（Cypress）
-- ビルド・デプロイ（CircleCI）
-- UI カタログ（Storybook）
+- データベース（[Cloud Firestore](https://firebase.google.com/docs/firestore?hl=ja))
+- API（[Cloud Functions for Firebase](https://firebase.google.com/docs/functions?hl=ja)）
+- ストレージ（[Cloud Storage](https://firebase.google.com/docs/storage?hl=ja)）
+- ホスティング（[Firebase Hosting](https://firebase.google.com/docs/hosting?hl=ja)）
+- アニメーション（[React Transition Group](https://reactcommunity.org/react-transition-group/)）
+- テスト（[Cypress](https://www.cypress.io)）
+- ビルド・デプロイ（[CircleCI](https://circleci.com)）
+- UI カタログ（[Storybook](https://storybook.js.org)）
 
 # 使い方
 ![demo](https://user-images.githubusercontent.com/48976713/86241223-80b91080-bbdd-11ea-8215-92efa02107ee.gif)
