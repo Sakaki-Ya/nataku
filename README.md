@@ -10,7 +10,7 @@
 バックエンドの処理の学習とFirebaseに触れるために、Natakuを制作しました。
 
 # 使用している主なライブラリやツール
-- TypeScript
+- [TypeScript](https://www.typescriptlang.org/)
 - データベース（[Cloud Firestore](https://firebase.google.com/docs/firestore?hl=ja))
 - API（[Cloud Functions for Firebase](https://firebase.google.com/docs/functions?hl=ja)）
 - ストレージ（[Cloud Storage](https://firebase.google.com/docs/storage?hl=ja)）
