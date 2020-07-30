@@ -7,6 +7,8 @@
 テキストの代わりに画像を用います。  
 [Nataku](https://nataku.cloud)
 
+Firebaseや画像配信API、そのほか使用したことのないツールに触れるためにNatakuを制作しました。
+
 # 使用している主なライブラリやツール
 - TypeScript
 - データベース（Cloud Firestore)
