@@ -11,6 +11,7 @@
 また、メンターの指導の元、ユーザーストーリーの設定、デザインカンプやER図の作成、コードレビューを受けながら開発を進めました。
 
 # 使用している主なライブラリやツール
+- Webフレームワーク（[React](https://ja.reactjs.org/docs/getting-started.html)）
 - [TypeScript](https://www.typescriptlang.org/)
 - データベース（[Cloud Firestore](https://firebase.google.com/docs/firestore?hl=ja))
 - API（[Cloud Functions for Firebase](https://firebase.google.com/docs/functions?hl=ja)）
