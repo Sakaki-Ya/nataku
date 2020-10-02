@@ -8,7 +8,10 @@
 [Nataku](https://nataku.cloud)
 
 バックエンドの処理の学習とFirebaseに触れるために、Natakuを制作しました。  
-また、メンターの指導の元、ユーザーストーリーの設定、デザインカンプやER図の作成、コードレビューを受けながら開発を進めました。
+開発にあたり、メンターの指導の元、ユーザーストーリーの設定、デザインカンプやER図の作成、コードレビューを受けながら実装を行ないました。  
+また、開発初期は```Docker```上で```Ruby on Rails```のAPIモードを用いてAPIの作成を行ないました。  
+[APIのリポジトリ](https://github.com/Sakaki-Ya/nataku-api)  
+ただし、より開発工数が少なく済む```Cloud Functions for Firebase```で機能要件を満たせると判断したため、上記APIは使用していません。
 
 # 使用している主なライブラリやツール
 - Webフレームワーク（[React](https://ja.reactjs.org/docs/getting-started.html)）
